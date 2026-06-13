@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model.loan;
+package model.role;
 
 /**
- *
- * @author FPTSHOP
+ * Model for Role table mapped to TaiKhoan.MaTaiKhoan.
  */
-public class KhoanVay {
+public class Role {
 
     private String maTaiKhoan;
-    private String maKhoanVay;
+    private String roleName;
 
     public String getMaTaiKhoan() {
         return maTaiKhoan;
@@ -21,11 +20,11 @@ public class KhoanVay {
         this.maTaiKhoan = maTaiKhoan;
     }
 
-    public String getMaKhoanVay() {
-        return maKhoanVay;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setMaKhoanVay(String maKhoanVay) {
-        this.maKhoanVay = maKhoanVay;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

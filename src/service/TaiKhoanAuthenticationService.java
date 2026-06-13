@@ -21,8 +21,6 @@ public class TaiKhoanAuthenticationService implements AuthenticationService {
 
     @Override
     public TaiKhoan authenticate(String username, String password) {
-        // Hiện tại dữ liệu mẫu không chứa mật khẩu, nên chỉ kiểm tra username tồn tại.
-        // Bạn có thể bổ sung trường Password vào bảng TaiKhoan nếu cần xác thực thật.
-        return repository.findByUsername(username);
+        return repository.findByUsernameAndPassword(username, password);
     }
 }

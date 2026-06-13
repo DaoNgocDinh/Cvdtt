@@ -15,6 +15,7 @@ public class TaiKhoan {
     private String maTaiKhoan;
     private String hoTen;
     private String email;
+    private String matKhau;
     private String chucVu;
     private Boolean locker;
     private String soDienThoai;
@@ -44,6 +45,14 @@ public class TaiKhoan {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
     }
 
     public String getChucVu() {
