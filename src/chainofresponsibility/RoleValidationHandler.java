@@ -8,6 +8,23 @@ package chainofresponsibility;
  *
  * @author FPTSHOP
  */
-public class RoleValidationHandler {
-    
+public class RoleValidationHandler extends AccessHandler {
+
+    @Override
+    public boolean handle(Employee employee) {
+
+        if (employee.getRole() == null) {
+
+            System.out.println("Chưa được cấp quyền");
+            return false;
+        }
+
+        System.out.println("Vai trò: " + employee.getRole());
+
+        if (nextHandler != null) {
+            return nextHandler.handle(employee);
+        }
+
+        return true;
+    }
 }

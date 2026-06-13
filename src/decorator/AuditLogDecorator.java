@@ -8,6 +8,22 @@ package decorator;
  *
  * @author FPTSHOP
  */
-public class AuditLogDecorator {
-    
+public class AuditLogDecorator
+        extends EmployeeServiceDecorator {
+
+    public AuditLogDecorator(
+            EmployeeService service) {
+
+        super(service);
+    }
+
+    @Override
+    public void createEmployee(Employee employee) {
+
+        service.createEmployee(employee);
+
+        System.out.println(
+                "[Audit] Ghi log tạo nhân viên"
+        );
+    }
 }

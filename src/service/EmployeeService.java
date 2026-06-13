@@ -8,6 +8,7 @@ package service;
  *
  * @author FPTSHOP
  */
-public class EmployeeService {
-    
+public interface EmployeeService {
+
+    void createEmployee(Employee employee);
 }

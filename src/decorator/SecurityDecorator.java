@@ -8,6 +8,22 @@ package decorator;
  *
  * @author FPTSHOP
  */
-public class SecurityDecorator {
-    
+public class SecurityDecorator
+        extends EmployeeServiceDecorator {
+
+    public SecurityDecorator(
+            EmployeeService service) {
+
+        super(service);
+    }
+
+    @Override
+    public void createEmployee(Employee employee) {
+
+        System.out.println(
+                "[Security] Kiểm tra quyền Admin"
+        );
+
+        service.createEmployee(employee);
+    }
 }

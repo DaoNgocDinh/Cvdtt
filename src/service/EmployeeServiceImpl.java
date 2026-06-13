@@ -2,19 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package chainofresponsibility;
+package service;
 
 /**
  *
  * @author FPTSHOP
  */
-public class PermissionValidationHandler extends AccessHandler {
+public class EmployeeServiceImpl
+        implements EmployeeService {
 
     @Override
-    public boolean handle(Employee employee) {
+    public void createEmployee(Employee employee) {
 
-        System.out.println("Kiểm tra quyền truy cập");
-
-        return true;
+        System.out.println(
+                "Lưu nhân viên vào Database"
+        );
     }
 }
