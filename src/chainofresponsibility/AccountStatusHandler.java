@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package chainofresponsibility;
-
+import model.employee.Employee;
 /**
  *
  * @author FPTSHOP
@@ -13,11 +13,11 @@ public class AccountStatusHandler extends AccessHandler {
     @Override
     public boolean handle(Employee employee) {
 
-        if (employee.isLocked()) {
-
-            System.out.println("Tài khoản bị khóa");
-            return false;
-        }
+//        if (employee.isLocked()) {
+//
+//            System.out.println("Tài khoản bị khóa");
+//            return false;
+//        }
 
         System.out.println("Tài khoản hợp lệ");
 

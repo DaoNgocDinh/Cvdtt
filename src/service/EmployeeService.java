@@ -4,6 +4,8 @@
  */
 package service;
 
+import model.employee.Employee;
+
 /**
  *
  * @author FPTSHOP

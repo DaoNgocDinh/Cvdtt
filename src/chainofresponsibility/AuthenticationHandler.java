@@ -4,6 +4,8 @@
  */
 package chainofresponsibility;
 
+import model.employee.Employee;
+
 /**
  *
  * @author FPTSHOP
