@@ -8,6 +8,6 @@ package view.auth;
  *
  * @author FPTSHOP
  */
-public class auth {
+public class LoginFrame {
     
 }
