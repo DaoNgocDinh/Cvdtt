@@ -1,13 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package strategy.risk;
 
-/**
- *
- * @author ACER
- */
-public class DataRiskStrategy {
-    
+public class DataRiskStrategy
+        implements RiskStrategy {
+
+    @Override
+    public Alert evaluateRisk(
+            RiskEvent event) {
+
+        return new Alert(
+                "Data Risk Detected: "
+                        + event.getDescription()
+        );
+    }
 }

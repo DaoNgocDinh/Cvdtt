@@ -1,13 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package strategy.loan;
 
-/**
- *
- * @author ACER
- */
 public class LoanManager {
-    
+
+    private LoanStrategy strategy;
+
+    public void setStrategy(
+            LoanStrategy strategy) {
+
+        this.strategy = strategy;
+    }
+
+    public void createLoan(
+            Loan loan) {
+
+        strategy.processLoan(loan);
+
+        System.out.println(
+                "Loan Created:"
+        );
+
+        System.out.println(
+                loan
+        );
+    }
 }

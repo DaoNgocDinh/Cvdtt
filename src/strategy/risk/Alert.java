@@ -1,13 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package strategy.risk;
 
-/**
- *
- * @author ACER
- */
 public class Alert {
-    
+
+    private String message;
+
+    public Alert(String message) {
+        this.message = message;
+    }
+
+    public void showAlert() {
+        System.out.println("ALERT: " + message);
+    }
 }
