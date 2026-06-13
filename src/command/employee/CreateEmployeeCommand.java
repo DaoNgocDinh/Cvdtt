@@ -1,13 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package command.employee;
+import command.Command;
 
-/**
- *
- * @author FPTSHOP
- */
-public class CreateEmployeeCommand {
-    
+import model.employee.Employee;
+import service.EmployeeService;
+
+public class CreateEmployeeCommand implements Command {
+
+    private EmployeeService service;
+    private Employee employee;
+
+    public CreateEmployeeCommand(
+            EmployeeService service,
+            Employee employee) {
+
+        this.service = service;
+        this.employee = employee;
+    }
+
+    @Override
+    public void execute() {
+        service.createEmployee(employee);
+    }
 }
