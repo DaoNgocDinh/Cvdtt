@@ -1,5 +1,10 @@
 package view.auth;
 
+import model.account.TaiKhoan;
+import observer.subjects.LoginService;
+import proxy.AuditProxy;
+import repository.TaiKhoanRepository;
+import service.TaiKhoanAuthenticationService;
 import view.dashboard.DashboardFrame;
 
 import javax.swing.*;
@@ -17,6 +22,7 @@ public class LoginFrame extends JFrame {
 
     private JTextField txtUsername;
     private JPasswordField txtPassword;
+    private LoginService loginService;
 
     public LoginFrame() {
         setTitle("Bank Internal System - Login");
@@ -25,6 +31,7 @@ public class LoginFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        loginService = createLoginService();
         setContentPane(createContent());
         getRootPane().setDefaultButton((JButton) getRootPane().getClientProperty("loginButton"));
 
@@ -186,12 +193,32 @@ public class LoginFrame extends JFrame {
     }
 
     private void openDashboard() {
-        if (txtUsername.getText().trim().isEmpty() || new String(txtPassword.getPassword()).trim().isEmpty()) {
+        String username = txtUsername.getText().trim();
+        String password = new String(txtPassword.getPassword()).trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter username and password.", "Login failed", JOptionPane.WARNING_MESSAGE);
             return;
         }
+
+        TaiKhoan taiKhoan = loginService.login(username, password);
+        if (taiKhoan == null) {
+            JOptionPane.showMessageDialog(this, "Login failed. Please check your username.", "Login failed", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (Boolean.TRUE.equals(taiKhoan.getLocker())) {
+            JOptionPane.showMessageDialog(this, "Your account is locked.", "Login failed", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         dispose();
         new DashboardFrame();
+    }
+
+    private LoginService createLoginService() {
+        TaiKhoanRepository taiKhoanRepository = new TaiKhoanRepository();
+        return new LoginService(new AuditProxy(new TaiKhoanAuthenticationService(taiKhoanRepository)));
     }
 
     private static class RoundedPanel extends JPanel {

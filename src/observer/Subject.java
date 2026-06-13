@@ -4,10 +4,30 @@
  */
 package observer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author FPTSHOP
  */
-public class Subject {
-    
+public abstract class Subject {
+
+    private final List<Observer> observers = new ArrayList<>();
+
+    public void registerObserver(Observer observer) {
+        if (observer != null && !observers.contains(observer)) {
+            observers.add(observer);
+        }
+    }
+
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    protected void notifyObservers(String event, Object data) {
+        for (Observer observer : new ArrayList<>(observers)) {
+            observer.update(event, data);
+        }
+    }
 }

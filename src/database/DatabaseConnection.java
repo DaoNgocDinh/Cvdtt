@@ -4,10 +4,18 @@
  */
 package database;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 /**
  *
  * @author FPTSHOP
  */
 public class DatabaseConnection {
-    
+
+    private static final SQLServerConnection SERVER_CONNECTION = new SQLServerConnection();
+
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+        return SERVER_CONNECTION.getConnection();
+    }
 }
