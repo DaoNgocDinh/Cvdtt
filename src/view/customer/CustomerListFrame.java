@@ -1,13 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view.customer;
 
-/**
- *
- * @author FPTSHOP
- */
-public class CustomerListFrame {
-    
+import javax.swing.*;
+import java.awt.*;
+
+public class CustomerListFrame extends JFrame {
+
+    public CustomerListFrame() {
+
+        setTitle("Customer Management");
+        setSize(900,500);
+
+        JTable table = new JTable();
+
+        JButton btnCreate =
+                new JButton("Create Customer");
+
+        add(btnCreate, BorderLayout.NORTH);
+        add(new JScrollPane(table),
+                BorderLayout.CENTER);
+
+        setVisible(true);
+    }
 }

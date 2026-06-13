@@ -1,13 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view.audit;
 
-/**
- *
- * @author FPTSHOP
- */
-public class AuditLogFrame {
-    
+import javax.swing.*;
+import java.awt.*;
+
+public class AuditLogFrame extends JFrame {
+
+    public AuditLogFrame() {
+
+        setTitle("Audit Log");
+        setSize(1000, 500);
+
+        String[] columns = {
+            "User",
+            "Action",
+            "Time"
+        };
+
+        JTable table
+                = new JTable(new Object[][]{},
+                columns);
+
+        add(new JScrollPane(table));
+
+        setVisible(true);
+    }
 }

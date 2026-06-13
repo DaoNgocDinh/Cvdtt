@@ -1,13 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package view.notification;
 
-/**
- *
- * @author FPTSHOP
- */
-public class NotificationFrame {
-    
+import javax.swing.*;
+import java.awt.*;
+
+public class NotificationFrame extends JFrame {
+
+    public NotificationFrame() {
+
+        setTitle("Notification");
+        setSize(700, 500);
+
+        JTextArea area
+                = new JTextArea();
+
+        JButton btnSend
+                = new JButton("Send");
+
+        add(new JScrollPane(area),
+                BorderLayout.CENTER);
+
+        add(btnSend,
+                BorderLayout.SOUTH);
+
+        setVisible(true);
+    }
 }
