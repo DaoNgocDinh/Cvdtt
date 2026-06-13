@@ -17,29 +17,29 @@ public class EmployeeFactory {
 
     public static Employee createAdmin(String id, String username, String password, String fullName, String email, String phone) {
         return EmployeeBuilder.builder()
-                .id(id)
-                .username(username)
-                .password(password)
-                .fullName(fullName)
-                .email(email)
-                .phone(phone)
-                .role(EmployeeRole.ADMIN.name())
-                .department("Administration")
-                .state(EmployeeState.ACTIVE)
+                .setId(id)
+                .setUsername(username)
+                .setPassword(password)
+                .setFullName(fullName)
+                .setEmail(email)
+                .setPhone(phone)
+                .setRole(EmployeeRole.ADMIN.name())
+                .setDepartment("Administration")
+                .setState(EmployeeState.ACTIVE)
                 .build();
     }
 
     public static Employee createEmployee(String id, String username, String password, String fullName, String email, String phone, String department) {
         return EmployeeBuilder.builder()
-                .id(id)
-                .username(username)
-                .password(password)
-                .fullName(fullName)
-                .email(email)
-                .phone(phone)
-                .role(EmployeeRole.EMPLOYEE.name())
-                .department(department)
-                .state(EmployeeState.ACTIVE)
+                .setId(id)
+                .setUsername(username)
+                .setPassword(password)
+                .setFullName(fullName)
+                .setEmail(email)
+                .setPhone(phone)
+                .setRole(EmployeeRole.EMPLOYEE.name())
+                .setDepartment(department)
+                .setState(EmployeeState.ACTIVE)
                 .build();
     }
 }

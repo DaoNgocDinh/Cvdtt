@@ -14,86 +14,67 @@ import model.employee.EmployeeState;
  */
 public class EmployeeBuilder {
 
-    private String id;
-    private String username;
-    private String password;
-    private String fullName;
-    private String email;
-    private String phone;
-    private String role;
-    private String department;
-    private EmployeeState state;
-    private LocalDate hiredDate;
+    private Employee employee;
 
     private EmployeeBuilder() {
+        this.employee = new Employee();
     }
 
     public static EmployeeBuilder builder() {
         return new EmployeeBuilder();
     }
 
-    public EmployeeBuilder id(String id) {
-        this.id = id;
+    public EmployeeBuilder setId(String id) {
+        employee.setId(id);
         return this;
     }
 
-    public EmployeeBuilder username(String username) {
-        this.username = username;
+    public EmployeeBuilder setUsername(String username) {
+        employee.setUsername(username);
         return this;
     }
 
-    public EmployeeBuilder password(String password) {
-        this.password = password;
+    public EmployeeBuilder setPassword(String password) {
+        employee.setPassword(password);
         return this;
     }
 
-    public EmployeeBuilder fullName(String fullName) {
-        this.fullName = fullName;
+    public EmployeeBuilder setFullName(String fullName) {
+        employee.setFullName(fullName);
         return this;
     }
 
-    public EmployeeBuilder email(String email) {
-        this.email = email;
+    public EmployeeBuilder setEmail(String email) {
+        employee.setEmail(email);
         return this;
     }
 
-    public EmployeeBuilder phone(String phone) {
-        this.phone = phone;
+    public EmployeeBuilder setPhone(String phone) {
+        employee.setPhone(phone);
         return this;
     }
 
-    public EmployeeBuilder role(String role) {
-        this.role = role;
+    public EmployeeBuilder setRole(String role) {
+        employee.setRole(role);
         return this;
     }
 
-    public EmployeeBuilder department(String department) {
-        this.department = department;
+    public EmployeeBuilder setDepartment(String department) {
+        employee.setDepartment(department);
         return this;
     }
 
-    public EmployeeBuilder state(EmployeeState state) {
-        this.state = state;
+    public EmployeeBuilder setState(EmployeeState state) {
+        employee.setState(state);
         return this;
     }
 
-    public EmployeeBuilder hiredDate(LocalDate hiredDate) {
-        this.hiredDate = hiredDate;
+    public EmployeeBuilder setHiredDate(LocalDate hiredDate) {
+        employee.setHiredDate(hiredDate);
         return this;
     }
 
     public Employee build() {
-        Employee employee = new Employee();
-        employee.setId(id);
-        employee.setUsername(username);
-        employee.setPassword(password);
-        employee.setFullName(fullName);
-        employee.setEmail(email);
-        employee.setPhone(phone);
-        employee.setRole(role);
-        employee.setDepartment(department);
-        employee.setState(state);
-        employee.setHiredDate(hiredDate);
         return employee;
     }
 }

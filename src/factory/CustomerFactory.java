@@ -15,29 +15,29 @@ public class CustomerFactory {
 
     public static Customer createIndividualCustomer(String id, String name, String email, String phone, String address, String identityNumber) {
         return CustomerBuilder.builder()
-                .id(id)
-                .name(name)
-                .email(email)
-                .phone(phone)
-                .address(address)
-                .customerType("Individual")
-                .identityNumber(identityNumber)
-                .active(true)
-                .registeredDate(java.time.LocalDate.now())
+                .setId(id)
+                .setName(name)
+                .setEmail(email)
+                .setPhone(phone)
+                .setAddress(address)
+                .setCustomerType("Individual")
+                .setIdentityNumber(identityNumber)
+                .setActive(true)
+                .setRegisteredDate(java.time.LocalDate.now())
                 .build();
     }
 
     public static Customer createBusinessCustomer(String id, String name, String email, String phone, String address, String identityNumber) {
         return CustomerBuilder.builder()
-                .id(id)
-                .name(name)
-                .email(email)
-                .phone(phone)
-                .address(address)
-                .customerType("Business")
-                .identityNumber(identityNumber)
-                .active(true)
-                .registeredDate(java.time.LocalDate.now())
+                .setId(id)
+                .setName(name)
+                .setEmail(email)
+                .setPhone(phone)
+                .setAddress(address)
+                .setCustomerType("Business")
+                .setIdentityNumber(identityNumber)
+                .setActive(true)
+                .setRegisteredDate(java.time.LocalDate.now())
                 .build();
     }
 }

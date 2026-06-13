@@ -15,16 +15,16 @@ public class LoanFactory {
 
     public static Loan createPersonalLoan(String loanId, String customerId, double amount, int termMonths, double interestRate) {
         return LoanBuilder.builder()
-                .loanId(loanId)
-                .customerId(customerId)
-                .amount(amount)
-                .termMonths(termMonths)
-                .interestRate(interestRate)
-                .loanType("Personal")
-                .status("Pending")
-                .startDate(java.time.LocalDate.now())
-                .endDate(java.time.LocalDate.now().plusMonths(termMonths))
-                .riskLevel("Medium")
+                .setLoanId(loanId)
+                .setCustomerId(customerId)
+                .setAmount(amount)
+                .setTermMonths(termMonths)
+                .setInterestRate(interestRate)
+                .setLoanType("Personal")
+                .setStatus("Pending")
+                .setStartDate(java.time.LocalDate.now())
+                .setEndDate(java.time.LocalDate.now().plusMonths(termMonths))
+                .setRiskLevel("Medium")
                 .build();
     }
 }

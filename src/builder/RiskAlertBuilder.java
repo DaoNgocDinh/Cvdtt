@@ -13,65 +13,52 @@ import model.risk.RiskAlert;
  */
 public class RiskAlertBuilder {
 
-    private String riskId;
-    private String relatedLoanId;
-    private String relatedCustomerId;
-    private String level;
-    private String description;
-    private LocalDateTime detectedAt;
-    private boolean resolved;
+    private RiskAlert alert;
 
     private RiskAlertBuilder() {
+        this.alert = new RiskAlert();
     }
 
     public static RiskAlertBuilder builder() {
         return new RiskAlertBuilder();
     }
 
-    public RiskAlertBuilder riskId(String riskId) {
-        this.riskId = riskId;
+    public RiskAlertBuilder setRiskId(String riskId) {
+        alert.setRiskId(riskId);
         return this;
     }
 
-    public RiskAlertBuilder relatedLoanId(String relatedLoanId) {
-        this.relatedLoanId = relatedLoanId;
+    public RiskAlertBuilder setRelatedLoanId(String relatedLoanId) {
+        alert.setRelatedLoanId(relatedLoanId);
         return this;
     }
 
-    public RiskAlertBuilder relatedCustomerId(String relatedCustomerId) {
-        this.relatedCustomerId = relatedCustomerId;
+    public RiskAlertBuilder setRelatedCustomerId(String relatedCustomerId) {
+        alert.setRelatedCustomerId(relatedCustomerId);
         return this;
     }
 
-    public RiskAlertBuilder level(String level) {
-        this.level = level;
+    public RiskAlertBuilder setLevel(String level) {
+        alert.setLevel(level);
         return this;
     }
 
-    public RiskAlertBuilder description(String description) {
-        this.description = description;
+    public RiskAlertBuilder setDescription(String description) {
+        alert.setDescription(description);
         return this;
     }
 
-    public RiskAlertBuilder detectedAt(LocalDateTime detectedAt) {
-        this.detectedAt = detectedAt;
+    public RiskAlertBuilder setDetectedAt(LocalDateTime detectedAt) {
+        alert.setDetectedAt(detectedAt);
         return this;
     }
 
-    public RiskAlertBuilder resolved(boolean resolved) {
-        this.resolved = resolved;
+    public RiskAlertBuilder setResolved(boolean resolved) {
+        alert.setResolved(resolved);
         return this;
     }
 
     public RiskAlert build() {
-        RiskAlert alert = new RiskAlert();
-        alert.setRiskId(riskId);
-        alert.setRelatedLoanId(relatedLoanId);
-        alert.setRelatedCustomerId(relatedCustomerId);
-        alert.setLevel(level);
-        alert.setDescription(description);
-        alert.setDetectedAt(detectedAt);
-        alert.setResolved(resolved);
         return alert;
     }
 }

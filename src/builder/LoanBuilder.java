@@ -13,86 +13,67 @@ import model.loan.Loan;
  */
 public class LoanBuilder {
 
-    private String loanId;
-    private String customerId;
-    private double amount;
-    private int termMonths;
-    private double interestRate;
-    private String loanType;
-    private String status;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String riskLevel;
+    private Loan loan;
 
     private LoanBuilder() {
+        this.loan = new Loan();
     }
 
     public static LoanBuilder builder() {
         return new LoanBuilder();
     }
 
-    public LoanBuilder loanId(String loanId) {
-        this.loanId = loanId;
+    public LoanBuilder setLoanId(String loanId) {
+        loan.setLoanId(loanId);
         return this;
     }
 
-    public LoanBuilder customerId(String customerId) {
-        this.customerId = customerId;
+    public LoanBuilder setCustomerId(String customerId) {
+        loan.setCustomerId(customerId);
         return this;
     }
 
-    public LoanBuilder amount(double amount) {
-        this.amount = amount;
+    public LoanBuilder setAmount(double amount) {
+        loan.setAmount(amount);
         return this;
     }
 
-    public LoanBuilder termMonths(int termMonths) {
-        this.termMonths = termMonths;
+    public LoanBuilder setTermMonths(int termMonths) {
+        loan.setTermMonths(termMonths);
         return this;
     }
 
-    public LoanBuilder interestRate(double interestRate) {
-        this.interestRate = interestRate;
+    public LoanBuilder setInterestRate(double interestRate) {
+        loan.setInterestRate(interestRate);
         return this;
     }
 
-    public LoanBuilder loanType(String loanType) {
-        this.loanType = loanType;
+    public LoanBuilder setLoanType(String loanType) {
+        loan.setLoanType(loanType);
         return this;
     }
 
-    public LoanBuilder status(String status) {
-        this.status = status;
+    public LoanBuilder setStatus(String status) {
+        loan.setStatus(status);
         return this;
     }
 
-    public LoanBuilder startDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public LoanBuilder setStartDate(LocalDate startDate) {
+        loan.setStartDate(startDate);
         return this;
     }
 
-    public LoanBuilder endDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public LoanBuilder setEndDate(LocalDate endDate) {
+        loan.setEndDate(endDate);
         return this;
     }
 
-    public LoanBuilder riskLevel(String riskLevel) {
-        this.riskLevel = riskLevel;
+    public LoanBuilder setRiskLevel(String riskLevel) {
+        loan.setRiskLevel(riskLevel);
         return this;
     }
 
     public Loan build() {
-        Loan loan = new Loan();
-        loan.setLoanId(loanId);
-        loan.setCustomerId(customerId);
-        loan.setAmount(amount);
-        loan.setTermMonths(termMonths);
-        loan.setInterestRate(interestRate);
-        loan.setLoanType(loanType);
-        loan.setStatus(status);
-        loan.setStartDate(startDate);
-        loan.setEndDate(endDate);
-        loan.setRiskLevel(riskLevel);
         return loan;
     }
 }

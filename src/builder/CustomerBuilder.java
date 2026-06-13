@@ -13,79 +13,62 @@ import model.customer.Customer;
  */
 public class CustomerBuilder {
 
-    private String id;
-    private String name;
-    private String email;
-    private String phone;
-    private String address;
-    private String customerType;
-    private String identityNumber;
-    private boolean active;
-    private LocalDate registeredDate;
+    private Customer customer;
 
     private CustomerBuilder() {
+        this.customer = new Customer();
     }
 
     public static CustomerBuilder builder() {
         return new CustomerBuilder();
     }
 
-    public CustomerBuilder id(String id) {
-        this.id = id;
+    public CustomerBuilder setId(String id) {
+        customer.setId(id);
         return this;
     }
 
-    public CustomerBuilder name(String name) {
-        this.name = name;
+    public CustomerBuilder setName(String name) {
+        customer.setName(name);
         return this;
     }
 
-    public CustomerBuilder email(String email) {
-        this.email = email;
+    public CustomerBuilder setEmail(String email) {
+        customer.setEmail(email);
         return this;
     }
 
-    public CustomerBuilder phone(String phone) {
-        this.phone = phone;
+    public CustomerBuilder setPhone(String phone) {
+        customer.setPhone(phone);
         return this;
     }
 
-    public CustomerBuilder address(String address) {
-        this.address = address;
+    public CustomerBuilder setAddress(String address) {
+        customer.setAddress(address);
         return this;
     }
 
-    public CustomerBuilder customerType(String customerType) {
-        this.customerType = customerType;
+    public CustomerBuilder setCustomerType(String customerType) {
+        customer.setCustomerType(customerType);
         return this;
     }
 
-    public CustomerBuilder identityNumber(String identityNumber) {
-        this.identityNumber = identityNumber;
+    public CustomerBuilder setIdentityNumber(String identityNumber) {
+        customer.setIdentityNumber(identityNumber);
         return this;
     }
 
-    public CustomerBuilder active(boolean active) {
-        this.active = active;
+    public CustomerBuilder setActive(boolean active) {
+        customer.setActive(active);
         return this;
     }
 
-    public CustomerBuilder registeredDate(LocalDate registeredDate) {
-        this.registeredDate = registeredDate;
+    public CustomerBuilder setRegisteredDate(LocalDate registeredDate) {
+        customer.setRegisteredDate(registeredDate);
         return this;
     }
 
     public Customer build() {
-        Customer customer = new Customer();
-        customer.setId(id);
-        customer.setName(name);
-        customer.setEmail(email);
-        customer.setPhone(phone);
-        customer.setAddress(address);
-        customer.setCustomerType(customerType);
-        customer.setIdentityNumber(identityNumber);
-        customer.setActive(active);
-        customer.setRegisteredDate(registeredDate);
         return customer;
     }
 }
