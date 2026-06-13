@@ -8,6 +8,7 @@ package observer;
  *
  * @author FPTSHOP
  */
-public class Observer {
-    
+public interface Observer {
+
+    void update(String event, Object data);
 }

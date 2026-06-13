@@ -4,10 +4,13 @@
  */
 package service;
 
+import model.account.TaiKhoan;
+
 /**
  *
  * @author FPTSHOP
  */
-public class AuthenticationService {
-    
+public interface AuthenticationService {
+
+    TaiKhoan authenticate(String username, String password);
 }

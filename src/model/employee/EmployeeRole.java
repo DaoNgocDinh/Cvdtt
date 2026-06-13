@@ -8,6 +8,10 @@ package model.employee;
  *
  * @author FPTSHOP
  */
-public class EmployeeRole {
-    
+public enum EmployeeRole {
+    ADMIN,
+    MANAGER,
+    AUDITOR,
+    EMPLOYEE,
+    RISK_OFFICER
 }

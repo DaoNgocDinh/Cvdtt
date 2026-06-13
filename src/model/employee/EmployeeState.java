@@ -8,6 +8,8 @@ package model.employee;
  *
  * @author FPTSHOP
  */
-public class EmployeeState {
-    
+public enum EmployeeState {
+    ACTIVE,
+    INACTIVE,
+    SUSPENDED
 }
