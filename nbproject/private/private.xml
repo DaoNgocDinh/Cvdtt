@@ -73,7 +73,6 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/RiskService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/AuditService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/NotificationService.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/EmployeeRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/CustomerRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/AuditRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/RiskRepository.java</file>
@@ -94,20 +93,8 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/forloan/CustomerValidationHandler.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/CustomerHandler.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/TaiKhoanRepository.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/TaiKhoanFacade.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/TaiKhoanService.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/main/TestFacade.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/builder/TaiKhoanBuilder.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/builder/RuiRoBuilder.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/account/AuthRequest.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/auth/AuthHandler.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/auth/CredentialHandler.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/auth/AccountStatusHandler.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/auth/LoginAttemptHandler.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/TaiKhoanAuthenticationService.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/factory/VayFactory.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/account/TaiKhoan.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/cache/LoginAttemptCache.java</file>
         </group>
     </open-files>
 </project-private>
