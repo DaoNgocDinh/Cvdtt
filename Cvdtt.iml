@@ -7,6 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -25,5 +26,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+=======
+>>>>>>> 5794d829815fc801a43fa85d2b050bbb9aeb2761
   </component>
 </module>
