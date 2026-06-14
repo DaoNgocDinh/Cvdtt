@@ -27,11 +27,11 @@ public class RiskAlertFrame extends JFrame {
         toolbar.add(detail);
         toolbar.add(resolve);
 
-        String[] columns = {"Ma canh bao", "Loai rui ro", "Nguon", "Muc do", "Noi dung", "Trang thai"};
+        String[] columns = {"Ma canh bao", "Loai rui ro", "Nguon", "Loai rui ro", "Noi dung", "Trang thai"};
         Object[][] rows = {
-                {"CB001", "Dang nhap bat thuong", "LoginService", "Cao", "Dang nhap sai nhieu lan", "Moi"},
-                {"CB002", "Xoa tai khoan", "EmployeeService", "Trung binh", "Yeu cau xoa nhan vien co quyen cao", "Dang xu ly"},
-                {"CB003", "Khoan vay lon", "LoanService", "Thap", "Khoan vay vuot nguong can theo doi", "Da xu ly"}
+                {"CB001", "Dang nhap bat thuong", "LoginService", "Rui ro bao mat", "Dang nhap sai nhieu lan", "Moi"},
+                {"CB002", "Xoa tai khoan", "EmployeeService", "Rui ro ho so", "Yeu cau xoa nhan vien co quyen cao", "Dang xu ly"},
+                {"CB003", "Khoan vay lon", "LoanService", "Rui ro tin dung", "Khoan vay vuot nguong can theo doi", "Da xu ly"}
         };
         table = AppUi.table(columns, rows);
 
