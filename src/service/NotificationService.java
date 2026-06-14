@@ -4,10 +4,26 @@
  */
 package service;
 
+import notification.Notification;
+import repository.NotificationRepository;
+import java.util.List;
+
 /**
- *
- * @author FPTSHOP
+ * Service for internal notification history.
  */
 public class NotificationService {
-    
+
+    private final NotificationRepository repository;
+
+    public NotificationService() {
+        this.repository = new NotificationRepository();
+    }
+
+    public void saveNotification(Notification notification) {
+        repository.save(notification);
+    }
+
+    public List<Notification> getAllNotifications() {
+        return repository.findAll();
+    }
 }

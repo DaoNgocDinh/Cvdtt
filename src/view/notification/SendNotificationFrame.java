@@ -1,5 +1,7 @@
 package view.notification;
 
+import facade.NotificationFacade;
+import notification.Notification;
 import view.common.AppUi;
 
 import javax.swing.*;
@@ -11,8 +13,10 @@ public class SendNotificationFrame extends JFrame {
     private JTextArea txtContent;
     private JComboBox<String> cbSender;
     private JComboBox<String> cbReceiver;
+    private final NotificationFacade notificationFacade;
 
     public SendNotificationFrame() {
+        notificationFacade = new NotificationFacade();
         AppUi.setupFrame(this, "Gui thong bao", 660, 560);
         setContentPane(createContent());
         setVisible(true);
@@ -24,7 +28,7 @@ public class SendNotificationFrame extends JFrame {
         JPanel form = AppUi.form();
 
         cbSender = AppUi.combo("Admin", "Manager", "Auditor", "Risk Officer", "System");
-        cbReceiver = AppUi.combo("Toan bo nhan vien", "Admin", "Manager", "Auditor", "Risk Officer", "Nhan vien duoc chon");
+        cbReceiver = AppUi.combo("Nhan vien");
         txtTitle = AppUi.textField();
         txtContent = AppUi.textArea(6);
 
@@ -41,6 +45,13 @@ public class SendNotificationFrame extends JFrame {
 
         send.addActionListener(e -> {
             if (AppUi.requireText(this, txtTitle)) {
+                Notification notification = new Notification();
+                notification.setSender(String.valueOf(cbSender.getSelectedItem()));
+                notification.setReceiver(String.valueOf(cbReceiver.getSelectedItem()));
+                notification.setTitle(txtTitle.getText().trim());
+                notification.setContent(txtContent.getText().trim());
+                notification.setStatus("Moi");
+                notificationFacade.sendNotification(notification);
                 AppUi.success(this, "Gui thong bao thanh cong.");
                 dispose();
             }

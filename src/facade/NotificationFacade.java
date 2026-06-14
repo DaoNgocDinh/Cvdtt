@@ -4,10 +4,26 @@
  */
 package facade;
 
+import notification.Notification;
+import service.NotificationService;
+import java.util.List;
+
 /**
- *
- * @author FPTSHOP
+ * Facade for internal notification history.
  */
 public class NotificationFacade {
-    
+
+    private final NotificationService notificationService;
+
+    public NotificationFacade() {
+        notificationService = new NotificationService();
+    }
+
+    public void sendNotification(Notification notification) {
+        notificationService.saveNotification(notification);
+    }
+
+    public List<Notification> getAllNotifications() {
+        return notificationService.getAllNotifications();
+    }
 }

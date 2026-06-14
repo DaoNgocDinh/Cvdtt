@@ -2,6 +2,7 @@ package strategy.risk;
 
 import database.DatabaseConnection;
 import model.risk.RuiRo;
+import observer.subjects.RiskMonitoringService;
 import singleton.SecurityService;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -59,6 +60,7 @@ public class RuiRoManager {
 
             ps.executeUpdate();
             System.out.println("[STRATEGY-RISK] Saved to table RuiRo successfully.");
+            RiskMonitoringService.getInstance().publishRisk(ruiRo);
 
         } catch (Exception e) {
             System.out.println("[STRATEGY-RISK] Save error: " + e.getMessage());
