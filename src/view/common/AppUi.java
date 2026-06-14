@@ -3,6 +3,7 @@ package view.common;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -195,8 +196,8 @@ public final class AppUi {
         return table;
     }
 
-    public static boolean requireText(Component parent, JTextField... fields) {
-        for (JTextField field : fields) {
+    public static boolean requireText(Component parent, JTextComponent... fields) {
+        for (JTextComponent field : fields) {
             if (field.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(parent, "Vui long nhap day du thong tin bat buoc.", "Du lieu khong hop le", JOptionPane.WARNING_MESSAGE);
                 field.requestFocus();
@@ -208,6 +209,10 @@ public final class AppUi {
 
     public static void success(Component parent, String message) {
         JOptionPane.showMessageDialog(parent, message, "Thanh cong", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public static void error(Component parent, String message) {
+        JOptionPane.showMessageDialog(parent, message, "Loi", JOptionPane.ERROR_MESSAGE);
     }
 
     private static class ShadowPanel extends JPanel {

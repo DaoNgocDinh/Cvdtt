@@ -4,14 +4,22 @@
  */
 package observer.observers;
 
+import facade.NotificationFacade;
 import model.account.TaiKhoan;
 import observer.Observer;
+import utils.AuthSession;
 
 /**
  *
  * @author FPTSHOP
  */
 public class NotificationObserver implements Observer {
+
+    private final NotificationFacade notificationFacade;
+
+    public NotificationObserver() {
+        notificationFacade = new NotificationFacade();
+    }
 
     @Override
     public void update(String event, Object data) {
@@ -25,10 +33,26 @@ public class NotificationObserver implements Observer {
             System.out.println("NOTIFICATION: Tai khoan '" + taiKhoan.getMaTaiKhoan() + "' da duoc tao.");
         } else if ("taiKhoan.updated".equals(event) && data instanceof TaiKhoan) {
             TaiKhoan taiKhoan = (TaiKhoan) data;
+            sendUpdateNotifications(taiKhoan);
             System.out.println("NOTIFICATION: Tai khoan '" + taiKhoan.getMaTaiKhoan() + "' da duoc cap nhat.");
         } else if ("taiKhoan.deleted".equals(event) && data instanceof TaiKhoan) {
             TaiKhoan taiKhoan = (TaiKhoan) data;
             System.out.println("NOTIFICATION: Tai khoan '" + taiKhoan.getMaTaiKhoan() + "' da duoc xoa.");
+        }
+    }
+
+    private void sendUpdateNotifications(TaiKhoan taiKhoan) {
+        TaiKhoan sender = AuthSession.getCurrentUser();
+        String senderName = sender != null ? sender.getHoTen() : "System";
+        String recipient = taiKhoan.getMaTaiKhoan();
+        String title = "Thong bao cap nhat thong tin tai khoan";
+        String message = "Admin " + senderName + " da cap nhat thong tin tai khoan cua ban.";
+        notificationFacade.sendNotification(senderName, recipient, title, message);
+
+        if (sender != null && !sender.getMaTaiKhoan().equals(recipient)) {
+            String adminTitle = "Xac nhan thong bao da gui";
+            String adminMessage = "Ban da cap nhat thong tin tai khoan '" + taiKhoan.getMaTaiKhoan() + "'.";
+            notificationFacade.sendNotification(senderName, sender.getMaTaiKhoan(), adminTitle, adminMessage);
         }
     }
 }

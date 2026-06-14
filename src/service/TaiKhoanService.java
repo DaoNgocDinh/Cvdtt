@@ -7,6 +7,7 @@ import model.risk.RiskLevel;
 import observer.Subject;
 import observer.observers.AuditLogObserver;
 import observer.observers.NotificationObserver;
+import observer.observers.RiskObserver;
 
 public class TaiKhoanService extends Subject {
     private final TaiKhoanRepository repository;
@@ -17,6 +18,7 @@ public class TaiKhoanService extends Subject {
         riskService = new RiskService();
         registerObserver(new AuditLogObserver());
         registerObserver(new NotificationObserver());
+        registerObserver(new RiskObserver());
     }
 
     public void createTaiKhoan(TaiKhoan taiKhoan) {
@@ -64,21 +66,19 @@ public class TaiKhoanService extends Subject {
         switch(level){
 
             case HIGH:
-
+                notifyObservers("risk.high", taiKhoan);
                 System.out.println(
                         "Rủi ro cao. Không thể xóa.");
-
                 return;
 
             case MEDIUM:
-
+                notifyObservers("risk.medium", taiKhoan);
                 System.out.println(
                         "Cảnh báo: tài khoản đang hoạt động.");
-
                 break;
 
             case LOW:
-
+                notifyObservers("risk.low", taiKhoan);
                 break;
         }
 
