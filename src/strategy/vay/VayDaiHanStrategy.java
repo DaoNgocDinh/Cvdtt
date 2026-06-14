@@ -23,8 +23,6 @@ public class VayDaiHanStrategy implements VayStrategy {
 
         BigDecimal traHangThang = tinhKhoanTraHangThang(vay);
         vay.setSoTienTraHangThang(traHangThang);
-
-        System.out.println("[STRATEGY-VAY] " + getMoTaCongThuc());
     }
 
     @Override
@@ -57,10 +55,5 @@ public class VayDaiHanStrategy implements VayStrategy {
         BigDecimal denominator = power.subtract(BigDecimal.ONE);
 
         return numerator.divide(denominator, 2, RoundingMode.HALF_UP);
-    }
-
-    @Override
-    public String getMoTaCongThuc() {
-        return "Công thức: Trả góp đều (Annuity / Equal Installment)";
     }
 }

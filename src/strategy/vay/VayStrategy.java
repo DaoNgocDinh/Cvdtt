@@ -9,5 +9,4 @@ public interface VayStrategy {
     BigDecimal tinhLaiSuat(Vay vay);
     BigDecimal tinhTongLaiPhaiTra(Vay vay);
     BigDecimal tinhKhoanTraHangThang(Vay vay);
-    String getMoTaCongThuc();
 }

@@ -23,8 +23,6 @@ public class VayNganHanStrategy implements VayStrategy {
 
         BigDecimal traHangThang = tinhKhoanTraHangThang(vay);
         vay.setSoTienTraHangThang(traHangThang);
-
-        System.out.println("[STRATEGY-VAY] " + getMoTaCongThuc());
     }
 
     @Override
@@ -49,10 +47,5 @@ public class VayNganHanStrategy implements VayStrategy {
         BigDecimal tongPhaiTra = vay.getSoTienVay().add(vay.getTongLaiPhaiTra());
         long soThang = ChronoUnit.MONTHS.between(vay.getNgayVay(), vay.getHanTraNo());
         return tongPhaiTra.divide(new BigDecimal(soThang), 2, RoundingMode.HALF_UP);
-    }
-
-    @Override
-    public String getMoTaCongThuc() {
-        return "Công thức: Lãi đơn (Simple Interest)";
     }
 }

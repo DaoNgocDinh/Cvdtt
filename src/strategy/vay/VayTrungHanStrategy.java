@@ -23,8 +23,6 @@ public class VayTrungHanStrategy implements VayStrategy {
 
         BigDecimal traHangThang = tinhKhoanTraHangThang(vay);
         vay.setSoTienTraHangThang(traHangThang);
-
-        System.out.println("[STRATEGY-VAY] " + getMoTaCongThuc());
     }
 
     @Override
@@ -56,10 +54,5 @@ public class VayTrungHanStrategy implements VayStrategy {
         return gocHangThang.add(
             vay.getTongLaiPhaiTra().divide(new BigDecimal(soThang), 2, RoundingMode.HALF_UP)
         );
-    }
-
-    @Override
-    public String getMoTaCongThuc() {
-        return "Công thức: Lãi giảm dần theo dư nợ (Reducing Balance)";
     }
 }

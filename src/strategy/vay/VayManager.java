@@ -27,8 +27,7 @@ public class VayManager {
         strategy.xuLyKhoanVay(vay);
 
         // In thông tin tính toán lãi vay
-        System.out.println("[STRATEGY-VAY] Lai suat: " + vay.getLaiSuat() + " ("
-                + strategy.getMoTaCongThuc() + ")");
+        System.out.println("[STRATEGY-VAY] Lai suat: " + vay.getLaiSuat());
         System.out.println("[STRATEGY-VAY] Tong lai phai tra: " + vay.getTongLaiPhaiTra());
         System.out.println("[STRATEGY-VAY] So tien tra hang thang: " + vay.getSoTienTraHangThang());
 
