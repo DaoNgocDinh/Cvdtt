@@ -94,10 +94,8 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/TaiKhoanRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/TaiKhoanAuthenticationService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/account/TaiKhoan.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/VayRepository.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/VayFacade.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/VayService.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/main/test.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/TaiKhoanFacade.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/TaiKhoanService.java</file>
         </group>
     </open-files>
 </project-private>
