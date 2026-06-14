@@ -27,7 +27,7 @@ public class RiskAlertFrame extends JFrame {
         toolbar.add(detail);
         toolbar.add(resolve);
 
-        String[] columns = {"Ma canh bao", "Loai rui ro", "Nguon", "Loai rui ro", "Noi dung", "Trang thai"};
+        String[] columns = {"Ma canh bao", "Ten rui ro", "Nguon", "Loai rui ro", "Noi dung", "Trang thai"};
         Object[][] rows = {
                 {"CB001", "Dang nhap bat thuong", "LoginService", "Rui ro bao mat", "Dang nhap sai nhieu lan", "Moi"},
                 {"CB002", "Xoa tai khoan", "EmployeeService", "Rui ro ho so", "Yeu cau xoa nhan vien co quyen cao", "Dang xu ly"},
