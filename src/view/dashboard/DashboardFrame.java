@@ -6,7 +6,6 @@ import view.auth.LoginFrame;
 import view.customer.CustomerListFrame;
 import view.employee.EmployeeListFrame;
 import view.notification.NotificationFrame;
-import view.permission.PermissionFrame;
 import view.risk.RiskAlertFrame;
 import view.report.ReportFrame;
 import utils.AuthSession;
@@ -242,11 +241,6 @@ public class DashboardFrame extends JFrame {
         modules.add(createModuleCard("Loan", "Loan files and approval", "L", new Color(22, 163, 74), () -> {
             if (Authorization.requireAnyRole(this, "ADMIN", "NHANVIEN")) {
                 new LoanListFrame();
-            }
-        }));
-        modules.add(createModuleCard("Permission", "Access control", "P", new Color(124, 58, 237), () -> {
-            if (Authorization.requireRole(this, "ADMIN")) {
-                new PermissionFrame();
             }
         }));
         modules.add(createModuleCard("Risk", "Risk alerts", "R", new Color(220, 38, 38), () -> {

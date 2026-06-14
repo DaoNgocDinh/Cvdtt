@@ -1,5 +1,6 @@
 package view.employee;
 
+import facade.TaiKhoanFacade;
 import view.common.AppUi;
 
 import javax.swing.*;
@@ -14,8 +15,14 @@ public class CreateEmployeeFrame extends JFrame {
     private JTextField txtDepartment;
     private JTextField txtPosition;
     private JComboBox<String> cbRole;
+    private final Runnable onSaved;
 
     public CreateEmployeeFrame() {
+        this(null);
+    }
+
+    public CreateEmployeeFrame(Runnable onSaved) {
+        this.onSaved = onSaved;
         AppUi.setupFrame(this, "Tao tai khoan nhan vien", 660, 560);
         setContentPane(createContent());
         setVisible(true);
@@ -32,7 +39,7 @@ public class CreateEmployeeFrame extends JFrame {
         txtPhone = AppUi.textField();
         txtDepartment = AppUi.textField();
         txtPosition = AppUi.textField();
-        cbRole = AppUi.combo("ADMIN", "MANAGER", "AUDITOR", "EMPLOYEE");
+        cbRole = AppUi.combo("ADMIN", "MANAGER", "AUDITOR", "NHANVIEN");
 
         AppUi.addField(form, 0, "Ma nhan vien", txtId);
         AppUi.addField(form, 1, "Ho ten", txtName);
@@ -65,6 +72,21 @@ public class CreateEmployeeFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Email khong dung dinh dang.", "Du lieu khong hop le", JOptionPane.WARNING_MESSAGE);
             return;
         }
+
+        String roleName = String.valueOf(cbRole.getSelectedItem());
+        TaiKhoanFacade facade = new TaiKhoanFacade();
+        facade.createNhanVien(
+                txtId.getText().trim(),
+                txtName.getText().trim(),
+                txtEmail.getText().trim(),
+                "123456",
+                txtPosition.getText().trim(),
+                roleName);
+
+        if (onSaved != null) {
+            onSaved.run();
+        }
+
         AppUi.success(this, "Tao tai khoan thanh cong. Username va mat khau mac dinh da duoc sinh, Audit Log da duoc ghi nhan.");
         dispose();
     }

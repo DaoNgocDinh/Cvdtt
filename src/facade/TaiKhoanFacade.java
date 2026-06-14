@@ -50,13 +50,25 @@ public class TaiKhoanFacade {
             String hoTen,
             String email,
             String matKhau) {
+        createNhanVien(maTaiKhoan, hoTen, email, matKhau, "Chuyên viên tín dụng", "NHANVIEN");
+    }
+
+    public void createNhanVien(
+            String maTaiKhoan,
+            String hoTen,
+            String email,
+            String matKhau,
+            String chucVu,
+            String roleName) {
 
         TaiKhoan taiKhoan =
                 TaiKhoanFactory.createNhanVien(
                         maTaiKhoan,
                         hoTen,
                         email,
-                        matKhau);
+                        matKhau,
+                        chucVu,
+                        roleName);
 
         CreateTaiKhoanCommand command =
                 new CreateTaiKhoanCommand(

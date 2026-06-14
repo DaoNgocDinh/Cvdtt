@@ -7,6 +7,7 @@ import facade.VayFacade;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public class VayFacade {
     private VayService service;
@@ -38,5 +39,9 @@ public class VayFacade {
                         vay);
 
         command.execute();
+    }
+
+    public List<Vay> getAllVay() {
+        return service.getAllLoans();
     }
 }

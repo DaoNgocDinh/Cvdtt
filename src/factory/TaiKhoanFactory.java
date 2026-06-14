@@ -25,14 +25,18 @@ public class TaiKhoanFactory {
     }
 
     public static TaiKhoan createNhanVien(String maTaiKhoan, String hoTen, String email, String matKhau) {
+        return createNhanVien(maTaiKhoan, hoTen, email, matKhau, "Chuyên viên tín dụng", "NHANVIEN");
+    }
+
+    public static TaiKhoan createNhanVien(String maTaiKhoan, String hoTen, String email, String matKhau, String chucVu, String roleName) {
         return TaiKhoanBuilder.builder()
                 .setMaTaiKhoan(maTaiKhoan)
                 .setHoTen(hoTen)
                 .setEmail(email)
                 .setMatKhau(matKhau)
-                .setChucVu("Chuyên viên tín dụng")
+                .setChucVu(chucVu)
                 .setLocker(false)
-                .setRoleName("NHANVIEN")
+                .setRoleName(roleName)
                 .build();
     }
 

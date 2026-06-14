@@ -1,5 +1,7 @@
 package view.employee;
 
+import facade.TaiKhoanFacade;
+import model.account.TaiKhoan;
 import view.common.AppUi;
 
 import javax.swing.*;
@@ -10,17 +12,22 @@ public class UpdateEmployeeFrame extends JFrame {
     private JTextField txtId;
     private JTextField txtName;
     private JTextField txtEmail;
-    private JTextField txtPhone;
     private JTextField txtPosition;
+    private final Runnable onSaved;
 
     public UpdateEmployeeFrame() {
-        this(new String[]{"NV001", "Nguyen Van An", "an.nv@bank.com", "Van hanh", "Giao dich vien", "EMPLOYEE", "Hoat dong"});
+        this(null, new String[]{"NV001", "Nguyen Van An", "an.nv@bank.com", "Van hanh", "Giao dich vien", "EMPLOYEE", "Hoat dong"});
     }
 
-    public UpdateEmployeeFrame(String[] data) {
+    public UpdateEmployeeFrame(Runnable onSaved, String[] data) {
+        this.onSaved = onSaved;
         AppUi.setupFrame(this, "Sua tai khoan nhan vien", 640, 500);
         setContentPane(createContent(data));
         setVisible(true);
+    }
+
+    public UpdateEmployeeFrame(String[] data) {
+        this(null, data);
     }
 
     private JComponent createContent(String[] data) {
@@ -31,7 +38,6 @@ public class UpdateEmployeeFrame extends JFrame {
         txtId = AppUi.textField();
         txtName = AppUi.textField();
         txtEmail = AppUi.textField();
-        txtPhone = AppUi.textField();
         txtPosition = AppUi.textField();
 
         txtId.setText(data[0]);
@@ -41,9 +47,8 @@ public class UpdateEmployeeFrame extends JFrame {
 
         AppUi.addField(form, 0, "Ma nhan vien", txtId);
         AppUi.addField(form, 1, "Ho ten", txtName);
-        AppUi.addField(form, 2, "So dien thoai", txtPhone);
-        AppUi.addField(form, 3, "Email", txtEmail);
-        AppUi.addField(form, 4, "Chuc vu", txtPosition);
+        AppUi.addField(form, 2, "Email", txtEmail);
+        AppUi.addField(form, 3, "Chuc vu", txtPosition);
 
         JPanel actions = AppUi.toolbar();
         JButton save = AppUi.button("Cap nhat");
@@ -53,6 +58,22 @@ public class UpdateEmployeeFrame extends JFrame {
 
         save.addActionListener(e -> {
             if (AppUi.requireText(this, txtId, txtName, txtEmail, txtPosition)) {
+                TaiKhoanFacade facade = new TaiKhoanFacade();
+                TaiKhoan existing = facade.getTaiKhoanById(txtId.getText().trim());
+                if (existing == null) {
+                    JOptionPane.showMessageDialog(this, "Khong tim thay tai khoan.", "Loi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                existing.setHoTen(txtName.getText().trim());
+                existing.setEmail(txtEmail.getText().trim());
+                existing.setChucVu(txtPosition.getText().trim());
+                facade.updateTaiKhoan(existing);
+
+                if (onSaved != null) {
+                    onSaved.run();
+                }
+
                 AppUi.success(this, "Cap nhat tai khoan thanh cong. Audit Log da duoc ghi nhan.");
                 dispose();
             }

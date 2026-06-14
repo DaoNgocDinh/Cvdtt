@@ -1,10 +1,14 @@
 package view.employee;
 
+import facade.TaiKhoanFacade;
+import model.account.TaiKhoan;
 import view.common.AppUi;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeListFrame extends JFrame {
 
@@ -34,15 +38,10 @@ public class EmployeeListFrame extends JFrame {
         toolbar.add(btnDelete);
 
         String[] columns = {"Ma NV", "Ho ten", "Email", "Phong ban", "Chuc vu", "Vai tro", "Trang thai"};
-        Object[][] rows = {
-                {"NV001", "Nguyen Van An", "an.nv@bank.com", "Van hanh", "Giao dich vien", "EMPLOYEE", "Hoat dong"},
-                {"NV002", "Tran Thi Binh", "binh.tt@bank.com", "Kiem toan", "Kiem toan vien", "AUDITOR", "Hoat dong"},
-                {"NV003", "Le Minh Quan", "quan.lm@bank.com", "Quan tri", "Quan tri vien", "ADMIN", "Hoat dong"},
-                {"NV004", "Pham Hoai Nam", "nam.ph@bank.com", "Tin dung", "Quan ly", "MANAGER", "Bi khoa"}
-        };
-        table = AppUi.table(columns, rows);
+        table = AppUi.table(columns, new Object[0][0]);
+        refreshTable();
 
-        btnCreate.addActionListener(e -> new CreateEmployeeFrame());
+        btnCreate.addActionListener(e -> new CreateEmployeeFrame(this::refreshTable));
         btnUpdate.addActionListener(e -> openSelectedUpdate());
         btnDetail.addActionListener(e -> openSelectedDetail());
         btnLock.addActionListener(e -> toggleLock());
@@ -65,7 +64,7 @@ public class EmployeeListFrame extends JFrame {
     private void openSelectedUpdate() {
         int row = selectedRow();
         if (row >= 0) {
-            new UpdateEmployeeFrame(rowData(row));
+            new UpdateEmployeeFrame(this::refreshTable, rowData(row));
         }
     }
 
@@ -89,10 +88,15 @@ public class EmployeeListFrame extends JFrame {
         if (row < 0) {
             return;
         }
-        String current = String.valueOf(table.getValueAt(row, 6));
-        String next = current.equals("Hoat dong") ? "Bi khoa" : "Hoat dong";
-        table.setValueAt(next, row, 6);
-        AppUi.success(this, "Cap nhat trang thai tai khoan thanh cong. Audit Log da duoc ghi nhan.");
+        String maNV = String.valueOf(table.getValueAt(row, 0));
+        TaiKhoanFacade facade = new TaiKhoanFacade();
+        TaiKhoan account = facade.getTaiKhoanById(maNV);
+        if (account != null) {
+            account.setLocker(!Boolean.TRUE.equals(account.getLocker()));
+            facade.updateTaiKhoan(account);
+            refreshTable();
+            AppUi.success(this, "Cap nhat trang thai tai khoan thanh cong. Audit Log da duoc ghi nhan.");
+        }
     }
 
     private void deleteSelected() {
@@ -102,8 +106,37 @@ public class EmployeeListFrame extends JFrame {
         }
         int confirm = JOptionPane.showConfirmDialog(this, "Thao tac xoa tai khoan co rui ro trung binh. Ban co muon tiep tuc?", "Xac nhan xoa", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            ((DefaultTableModel) table.getModel()).removeRow(row);
+            String maNV = String.valueOf(table.getValueAt(row, 0));
+            TaiKhoanFacade facade = new TaiKhoanFacade();
+            facade.deleteTaiKhoan(maNV);
+            refreshTable();
             AppUi.success(this, "Xoa tai khoan thanh cong. He thong da gui thong bao noi bo.");
         }
+    }
+
+    private void refreshTable() {
+        String[] columns = {"Ma NV", "Ho ten", "Email", "Phong ban", "Chuc vu", "Vai tro", "Trang thai"};
+        TaiKhoanFacade facade = new TaiKhoanFacade();
+        java.util.List<TaiKhoan> allAccounts = facade.getAllTaiKhoan();
+        java.util.List<TaiKhoan> employees = new ArrayList<>();
+        for (TaiKhoan account : allAccounts) {
+            if (account.getRoleName() != null && !account.getRoleName().equalsIgnoreCase("KHACHHANG")) {
+                employees.add(account);
+            }
+        }
+
+        Object[][] rows = new Object[employees.size()][columns.length];
+        for (int i = 0; i < employees.size(); i++) {
+            TaiKhoan account = employees.get(i);
+            rows[i][0] = account.getMaTaiKhoan();
+            rows[i][1] = account.getHoTen();
+            rows[i][2] = account.getEmail();
+            rows[i][3] = "";
+            rows[i][4] = account.getChucVu();
+            rows[i][5] = account.getRoleName();
+            rows[i][6] = Boolean.TRUE.equals(account.getLocker()) ? "Bi khoa" : "Hoat dong";
+        }
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setDataVector(rows, columns);
     }
 }
