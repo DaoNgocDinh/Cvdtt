@@ -16,10 +16,9 @@ public class TaiKhoanTest {
         // TEST CREATE
         // ==========================
 
-
         facade.createVay(
-                "KV999",
-                "KH001",
+                "KV103",
+                "KH008",
                 new BigDecimal("50000000"),
                 LocalDate.now(),
                 LocalDate.now().plusMonths(12)

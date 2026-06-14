@@ -1,10 +1,10 @@
 package view.dashboard;
 
+import facade.VayFacade;
 import view.audit.AuditLogFrame;
 import view.auth.LoginFrame;
 import view.customer.CustomerListFrame;
 import view.employee.EmployeeListFrame;
-import view.loan.LoanListFrame;
 import view.notification.NotificationFrame;
 import view.permission.PermissionFrame;
 import view.risk.RiskAlertFrame;
@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import view.loan.CreateLoanFrame;
 
 public class DashboardFrame extends JFrame {
 
@@ -225,7 +227,7 @@ public class DashboardFrame extends JFrame {
 
         modules.add(createModuleCard("Employee", "Staff records and roles", "E", new Color(37, 99, 235), () -> new EmployeeListFrame()));
         modules.add(createModuleCard("Customer", "Customer profiles", "C", new Color(14, 165, 233), () -> new CustomerListFrame()));
-        modules.add(createModuleCard("Loan", "Loan files and approval", "L", new Color(22, 163, 74), () -> new LoanListFrame()));
+        modules.add(createModuleCard("Loan", "Loan files and approval", "L", new Color(22, 163, 74), () -> new CreateLoanFrame(new VayFacade()).setVisible(true)));
         modules.add(createModuleCard("Permission", "Access control", "P", new Color(124, 58, 237), () -> new PermissionFrame()));
         modules.add(createModuleCard("Risk", "Risk alerts", "R", new Color(220, 38, 38), () -> new RiskAlertFrame()));
         modules.add(createModuleCard("Audit Log", "System activity", "A", new Color(217, 119, 6), () -> new AuditLogFrame()));
