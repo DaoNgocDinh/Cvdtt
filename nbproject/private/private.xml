@@ -4,41 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/main/Main.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/employee/Employee.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/employee/AdminEmployee.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/employee/ManagerEmployee.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/employee/AuditorEmployee.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/employee/EmployeeRole.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/employee/EmployeeState.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/customer/Customer.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/customer/IndividualCustomer.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/customer/BusinessCustomer.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/risk/RiskAlert.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/risk/RiskLevel.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/audit/AuditLog.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/notification/Notification.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/builder/EmployeeBuilder.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/builder/CustomerBuilder.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/builder/LoanBuilder.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/factory/EmployeeFactory.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/factory/CustomerFactory.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/factory/LoanFactory.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/Command.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/employee/CreateEmployeeCommand.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/employee/UpdateEmployeeCommand.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/employee/LockEmployeeCommand.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/employee/DeleteEmployeeCommand.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/customer/CreateCustomerCommand.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/customer/UpdateCustomerCommand.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/customer/DeleteCustomerCommand.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/loan/CreateLoanCommand.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/loan/ApproveLoanCommand.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/loan/RejectLoanCommand.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/command/loan/CloseLoanCommand.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/AuthenticationFacade.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/EmployeeFacade.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/CustomerFacade.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/LoanFacade.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/RiskFacade.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/NotificationFacade.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/proxy/SecurityProxy.java</file>
@@ -76,7 +51,6 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/observer/observers/NotificationObserver.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/observer/subjects/LoginService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/observer/subjects/PermissionService.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/observer/subjects/LoanService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/observer/subjects/RiskMonitoringService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/mediator/NotificationMediator.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/mediator/ConcreteNotificationMediator.java</file>
@@ -85,10 +59,6 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/mediator/colleague/AuditorUser.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/mediator/colleague/RiskOfficerUser.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/AccessHandler.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/forusermanagerment/AuthenticationHandler.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/forusermanagerment/AccountStatusHandler.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/forusermanagerment/RoleValidationHandler.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/forusermanagerment/PermissionValidationHandler.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/forloan/LoanValidationHandler.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/IncomeValidationHandler.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/CreditScoreHandler.java</file>
@@ -105,7 +75,6 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/NotificationService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/EmployeeRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/CustomerRepository.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/LoanRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/AuditRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/RiskRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/NotificationRepository.java</file>
@@ -118,14 +87,27 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/dashboard/DashboardFrame.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/EmployeeServiceImpl.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/decorator/EmployeeServiceDecorator.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/main/TestCoR.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/main/TestDecorator.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/loan/KhoanVay.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/loan/Vay.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/LoanService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/LoanServiceImpl.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/forloan/CustomerValidationHandler.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/CustomerHandler.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/TaiKhoanRepository.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/TaiKhoanFacade.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/TaiKhoanService.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/main/TestFacade.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/builder/TaiKhoanBuilder.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/builder/RuiRoBuilder.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/account/AuthRequest.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/auth/AuthHandler.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/auth/CredentialHandler.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/auth/AccountStatusHandler.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/chainofresponsibility/auth/LoginAttemptHandler.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/TaiKhoanAuthenticationService.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/factory/VayFactory.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/account/TaiKhoan.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/cache/LoginAttemptCache.java</file>
         </group>
     </open-files>
 </project-private>

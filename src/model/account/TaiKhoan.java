@@ -22,6 +22,7 @@ public class TaiKhoan {
     private String cccd;
     private BigDecimal soTienConNo;
     private String roleName;
+    private int failedAttempts = 0;
 
     public String getMaTaiKhoan() {
         return maTaiKhoan;
@@ -101,5 +102,21 @@ public class TaiKhoan {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public int getFailedAttempts() {
+        return failedAttempts;
+    }
+
+    public void setFailedAttempts(int failedAttempts) {
+        this.failedAttempts = failedAttempts;
+    }
+
+    public void increaseFailedAttempts() {
+        this.failedAttempts++;
+    }
+
+    public void resetFailedAttempts() {
+        this.failedAttempts = 0;
     }
 }

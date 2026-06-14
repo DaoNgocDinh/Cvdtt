@@ -19,13 +19,12 @@ import java.sql.SQLException;
  */
 public class TaiKhoanRepository {
 
-    private static final String FIND_BY_USERNAME_AND_PASSWORD_SQL = "SELECT t.MaTaiKhoan, t.HoTen, t.Email, t.MatKhau, t.ChucVu, t.Locker, t.SoDienThoai, t.CCCD, t.SoTienConNo, r.RoleName " +
-            "FROM TaiKhoan t LEFT JOIN Role r ON t.MaTaiKhoan = r.MaTaiKhoan " +
-            "WHERE t.MaTaiKhoan = ? AND t.MatKhau = ?";
+    private static final String FIND_BY_USERNAME_AND_PASSWORD_SQL = "SELECT t.MaTaiKhoan, t.HoTen, t.Email, t.MatKhau, t.ChucVu, t.Locker, t.SoDienThoai, t.CCCD, t.SoTienConNo, r.RoleName "
+            + "FROM TaiKhoan t LEFT JOIN Role r ON t.MaTaiKhoan = r.MaTaiKhoan "
+            + "WHERE t.MaTaiKhoan = ? AND t.MatKhau = ?";
 
     public TaiKhoan findByUsernameAndPassword(String username, String password) {
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_BY_USERNAME_AND_PASSWORD_SQL)) {
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(FIND_BY_USERNAME_AND_PASSWORD_SQL)) {
             statement.setString(1, username);
             statement.setString(2, password);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -56,15 +55,15 @@ public class TaiKhoanRepository {
 
     public void save(TaiKhoan taiKhoan) {
 
-        String taiKhoanSql =
-                "INSERT INTO TaiKhoan "
-                        + "(MaTaiKhoan, HoTen, Email, MatKhau, ChucVu, Locker, SoDienThoai, CCCD, SoTienConNo) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String taiKhoanSql
+                = "INSERT INTO TaiKhoan "
+                + "(MaTaiKhoan, HoTen, Email, MatKhau, ChucVu, Locker, SoDienThoai, CCCD, SoTienConNo) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        String roleSql =
-                "INSERT INTO Role "
-                        + "(MaTaiKhoan, RoleName) "
-                        + "VALUES (?, ?)";
+        String roleSql
+                = "INSERT INTO Role "
+                + "(MaTaiKhoan, RoleName) "
+                + "VALUES (?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection()) {
 
@@ -72,8 +71,8 @@ public class TaiKhoanRepository {
 
             try {
 
-                PreparedStatement tkStmt =
-                        connection.prepareStatement(taiKhoanSql);
+                PreparedStatement tkStmt
+                        = connection.prepareStatement(taiKhoanSql);
 
                 tkStmt.setString(1, taiKhoan.getMaTaiKhoan());
                 tkStmt.setString(2, taiKhoan.getHoTen());
@@ -88,8 +87,8 @@ public class TaiKhoanRepository {
 
                 tkStmt.executeUpdate();
 
-                PreparedStatement roleStmt =
-                        connection.prepareStatement(roleSql);
+                PreparedStatement roleStmt
+                        = connection.prepareStatement(roleSql);
 
                 roleStmt.setString(1, taiKhoan.getMaTaiKhoan());
                 roleStmt.setString(2, taiKhoan.getRoleName());
@@ -112,11 +111,11 @@ public class TaiKhoanRepository {
 
     public void delete(String maTaiKhoan) {
 
-        String deleteRoleSql =
-                "DELETE FROM Role WHERE MaTaiKhoan = ?";
+        String deleteRoleSql
+                = "DELETE FROM Role WHERE MaTaiKhoan = ?";
 
-        String deleteTaiKhoanSql =
-                "DELETE FROM TaiKhoan WHERE MaTaiKhoan = ?";
+        String deleteTaiKhoanSql
+                = "DELETE FROM TaiKhoan WHERE MaTaiKhoan = ?";
 
         try (Connection connection = DatabaseConnection.getConnection()) {
 
@@ -125,15 +124,15 @@ public class TaiKhoanRepository {
             try {
 
                 // Xóa role trước
-                PreparedStatement roleStmt =
-                        connection.prepareStatement(deleteRoleSql);
+                PreparedStatement roleStmt
+                        = connection.prepareStatement(deleteRoleSql);
 
                 roleStmt.setString(1, maTaiKhoan);
                 roleStmt.executeUpdate();
 
                 // Xóa tài khoản
-                PreparedStatement tkStmt =
-                        connection.prepareStatement(deleteTaiKhoanSql);
+                PreparedStatement tkStmt
+                        = connection.prepareStatement(deleteTaiKhoanSql);
 
                 tkStmt.setString(1, maTaiKhoan);
                 tkStmt.executeUpdate();
@@ -154,23 +153,21 @@ public class TaiKhoanRepository {
 
     public void update(TaiKhoan taiKhoan) {
 
-        String sql =
-                "UPDATE TaiKhoan "
-                        + "SET HoTen = ?, "
-                        + "Email = ?, "
-                        + "MatKhau = ?, "
-                        + "ChucVu = ?, "
-                        + "Locker = ?, "
-                        + "SoDienThoai = ?, "
-                        + "CCCD = ?, "
-                        + "SoTienConNo = ? "
-                        + "WHERE MaTaiKhoan = ?";
+        String sql
+                = "UPDATE TaiKhoan "
+                + "SET HoTen = ?, "
+                + "Email = ?, "
+                + "MatKhau = ?, "
+                + "ChucVu = ?, "
+                + "Locker = ?, "
+                + "SoDienThoai = ?, "
+                + "CCCD = ?, "
+                + "SoTienConNo = ? "
+                + "WHERE MaTaiKhoan = ?";
 
-        try (Connection connection =
-                     DatabaseConnection.getConnection();
-
-             PreparedStatement stmt =
-                     connection.prepareStatement(sql)) {
+        try (Connection connection
+                = DatabaseConnection.getConnection(); PreparedStatement stmt
+                = connection.prepareStatement(sql)) {
 
             stmt.setString(1, taiKhoan.getHoTen());
             stmt.setString(2, taiKhoan.getEmail());
@@ -187,6 +184,51 @@ public class TaiKhoanRepository {
 
         } catch (Exception e) {
 
+            e.printStackTrace();
+        }
+    }
+
+    public TaiKhoan findByUsername(String username) {
+
+        String sql
+                = "SELECT t.MaTaiKhoan, t.HoTen, t.Email, t.MatKhau, t.ChucVu, t.Locker, "
+                + "t.SoDienThoai, t.CCCD, t.SoTienConNo, r.RoleName "
+                + "FROM TaiKhoan t "
+                + "LEFT JOIN Role r ON t.MaTaiKhoan = r.MaTaiKhoan "
+                + "WHERE t.MaTaiKhoan = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, username);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                if (resultSet.next()) {
+                    return mapToTaiKhoan(resultSet);
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public void updateLockStatus(String maTaiKhoan, boolean locker) {
+
+        String sql = "UPDATE TaiKhoan SET Locker = ? WHERE MaTaiKhoan = ?";
+
+        try (Connection connection
+                = DatabaseConnection.getConnection(); PreparedStatement stmt
+                = connection.prepareStatement(sql)) {
+
+            stmt.setBoolean(1, locker);
+            stmt.setString(2, maTaiKhoan);
+
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

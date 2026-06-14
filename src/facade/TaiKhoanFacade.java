@@ -10,7 +10,7 @@ import command.TaiKhoan.UpdateTaiKhoanCommand;
 import java.math.BigDecimal;
 
 public class TaiKhoanFacade {
-    private TaiKhoanService taiKhoanService;
+    private final TaiKhoanService taiKhoanService;
 
     public TaiKhoanFacade() {
         taiKhoanService = new TaiKhoanService();
@@ -40,11 +40,6 @@ public class TaiKhoanFacade {
 
         command.execute();
     }
-
-    // ==========================
-    // NHAN VIEN
-    // ==========================
-
     public void createNhanVien(
             String maTaiKhoan,
             String hoTen,
@@ -65,11 +60,6 @@ public class TaiKhoanFacade {
 
         command.execute();
     }
-
-    // ==========================
-    // KHACH HANG
-    // ==========================
-
     public void createKhachHang(
             String maTaiKhoan,
             String hoTen,
