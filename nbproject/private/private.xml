@@ -18,7 +18,6 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/NotificationFacade.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/proxy/SecurityProxy.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/proxy/AuditProxy.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/singleton/AuditLogger.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/auth/ChangePasswordFrame.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/employee/EmployeeListFrame.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/employee/CreateEmployeeFrame.java</file>
@@ -28,7 +27,6 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/customer/CreateCustomerFrame.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/customer/UpdateCustomerFrame.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/customer/CustomerDetailFrame.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/loan/LoanListFrame.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/loan/CreateLoanFrame.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/loan/LoanApprovalFrame.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/loan/LoanDetailFrame.java</file>
@@ -39,11 +37,6 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/notification/SendNotificationFrame.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/permission/PermissionFrame.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/view/permission/GrantPermissionFrame.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/strategy/RiskStrategy.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/strategy/LoginRiskStrategy.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/strategy/PermissionRiskStrategy.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/strategy/LoanRiskStrategy.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/strategy/SecurityRiskStrategy.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/observer/Observer.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/observer/Subject.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/observer/observers/AuditLogObserver.java</file>

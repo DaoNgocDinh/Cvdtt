@@ -93,9 +93,7 @@ public class VayRepository {
             ps.setDate(5, vay.getHanTraNo() != null ? Date.valueOf(vay.getHanTraNo()) : null);
 
             ps.executeUpdate();
-            System.out.println("[VayRepository] Lưu khoản vay thành công: " + vay.getMaKhoanVay());
         } catch (Exception e) {
-            System.out.println("[VayRepository] Lỗi lưu khoản vay: " + e.getMessage());
             e.printStackTrace();
         }
     }

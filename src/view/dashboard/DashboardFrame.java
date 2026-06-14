@@ -1,5 +1,6 @@
 package view.dashboard;
 
+import facade.VayFacade;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,7 +12,7 @@ import view.audit.AuditLogFrame;
 import view.auth.LoginFrame;
 import view.customer.CustomerListFrame;
 import view.employee.EmployeeListFrame;
-import view.loan.LoanListFrame;
+import view.loan.CreateLoanFrame;
 import view.notification.NotificationFrame;
 import view.permission.PermissionFrame;
 import view.report.ReportFrame;
@@ -237,7 +238,7 @@ public class DashboardFrame extends JFrame {
         }));
         modules.add(createModuleCard("Loan", "Loan files and approval", "L", new Color(22, 163, 74), () -> {
             if (Authorization.requireAnyRole(this, "ADMIN", "NHANVIEN")) {
-                new LoanListFrame();
+                new CreateLoanFrame(new VayFacade()).setVisible(true);
             }
         }));
         modules.add(createModuleCard("Permission", "Access control", "P", new Color(124, 58, 237), () -> {
@@ -330,6 +331,7 @@ public class DashboardFrame extends JFrame {
     }
 
     private static class SidebarPanel extends JPanel {
+
         SidebarPanel() {
             setOpaque(false);
         }
@@ -350,6 +352,7 @@ public class DashboardFrame extends JFrame {
     }
 
     private static class RoundedPanel extends JPanel {
+
         private final int radius;
         private final Color color;
 

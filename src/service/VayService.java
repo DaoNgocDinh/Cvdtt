@@ -14,6 +14,7 @@ import decorator.audit.AlertDecorator;
 import decorator.audit.AuditLogger;
 import decorator.audit.BasicAuditLogger;
 import decorator.audit.SecurityDecorator;
+import chainofresponsibility.risk.*;
 
 public class VayService {
 
@@ -83,6 +84,19 @@ public class VayService {
         // 5. Lưu DB
         try {
             vayRepository.save(vay);
+
+            RiskContext context
+                    = new RiskContext();
+
+            context.vay = vay;
+            context.khachHang = khachHang;
+
+            System.out.println("BAT DAU DANH GIA RUI RO");
+
+            new RiskChainManager()
+                    .evaluate(context);
+
+            System.out.println("KET THUC DANH GIA RUI RO");
 
             logger.log(
                     "loan.created | "
