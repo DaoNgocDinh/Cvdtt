@@ -1,5 +1,7 @@
 package decorator.audit;
 
+import singleton.AuditLogManager;
+
 public class BasicAuditLogger
         implements AuditLogger {
 
@@ -8,5 +10,12 @@ public class BasicAuditLogger
 
         System.out.println(
                 "[AUDIT] " + message);
+
+        AuditLogManager
+                .getInstance()
+                .writeLog(
+                        "ADMIN",
+                        message
+                );
     }
 }

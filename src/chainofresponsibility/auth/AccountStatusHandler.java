@@ -12,10 +12,10 @@ public class AccountStatusHandler extends AuthHandler {
     public boolean handle(AuthRequest request) {
 
         if (request.account.getLocker()) {
-            System.out.println("Tk bi khoa");
+            System.out.println("[CoR]: Tai khoan bi khoa");
             return false;
         }
-        System.out.println("Tk khong bi khoa");
+        System.out.println("[CoR]: Tai khoan khong bi khoa");
 
         return next == null || handleNext(request);
     }

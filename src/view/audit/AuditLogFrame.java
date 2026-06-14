@@ -4,6 +4,9 @@ import view.common.AppUi;
 
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.table.DefaultTableModel;
+import singleton.AuditLog;
+import singleton.AuditLogManager;
 
 public class AuditLogFrame extends JFrame {
 
@@ -28,13 +31,25 @@ public class AuditLogFrame extends JFrame {
         toolbar.add(export);
 
         String[] columns = {"Thoi gian", "Nguoi dung", "Vai tro", "Hanh dong", "Doi tuong", "Ket qua"};
-        Object[][] rows = {
-                {"2026-04-12 08:30", "admin", "ADMIN", "Tao tai khoan nhan vien", "NV001", "Thanh cong"},
-                {"2026-04-12 09:05", "manager01", "MANAGER", "Phe duyet khoan vay", "VAY001", "Thanh cong"},
-                {"2026-04-12 10:18", "auditor01", "AUDITOR", "Xem Audit Log", "SYSTEM", "Thanh cong"},
-                {"2026-04-12 11:22", "admin", "ADMIN", "Thu hoi quyen", "NV004", "Thanh cong"}
-        };
-        JTable table = AppUi.table(columns, rows);
+        DefaultTableModel model
+                = new DefaultTableModel(columns, 0);
+
+        for (AuditLog log
+                : AuditLogManager
+                        .getInstance()
+                        .getLogs()) {
+
+            model.addRow(new Object[]{
+                log.getThoiGian(),
+                log.getMaTaiKhoan(),
+                "-",
+                log.getHanhDong(),
+                "-",
+                "Success"
+            });
+        }
+
+        JTable table = new JTable(model);
 
         find.addActionListener(e -> JOptionPane.showMessageDialog(this, "Da loc Audit Log theo tu khoa: " + search.getText(), "Tim kiem", JOptionPane.INFORMATION_MESSAGE));
         export.addActionListener(e -> AppUi.success(this, "Bao cao Audit Log da duoc tao mau."));

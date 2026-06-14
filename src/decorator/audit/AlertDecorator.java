@@ -26,6 +26,10 @@ public class AlertDecorator
                     "[ALERT] Dang nhap that bai");
         }
 
+        if (message.contains("updated")) {
+            System.out.println("[ALERT] Tai khoan vua duoc cap nhat");
+        }
+
         if (message.contains("loan.created")) {
 
             System.out.println(

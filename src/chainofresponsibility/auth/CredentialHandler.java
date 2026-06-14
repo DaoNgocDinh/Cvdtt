@@ -18,8 +18,10 @@ public class CredentialHandler extends AuthHandler {
         TaiKhoan account = request.account;
 
         if (account == null) {
+            System.out.println("[CoR]: Tai khoan khong ton tai");
             return false;
         }
+            System.out.println("[CoR]: Tai khoan co ton tai");
 
         if (!account.getMatKhau().equals(password)) {
 
@@ -27,7 +29,7 @@ public class CredentialHandler extends AuthHandler {
 
             int attempts = LoginAttemptCache.get(username);
 
-            System.out.println("FAILED: " + attempts);
+            System.out.println("[CoR]: Sai mat khau lan: " + attempts);
 
             if (attempts >= 5) {
                 account.setLocker(true);
@@ -36,13 +38,11 @@ public class CredentialHandler extends AuthHandler {
                         true
                 );
 
-                System.out.println("ACCOUNT LOCKED");
+                System.out.println("[CoR]: Tai khoan da bi khoa do nhap sai qua nhieu lan");
             }
 
             return false;
         }
-
-        // ✅ đúng mật khẩu → reset cache
         LoginAttemptCache.reset(username);
 
         return handleNext(request);

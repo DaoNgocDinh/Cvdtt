@@ -26,6 +26,18 @@ public class AuditLogObserver implements Observer {
 
     @Override
     public void update(String event, Object data) {
-        logger.log(event);
+
+        if (data instanceof TaiKhoan) {
+
+            TaiKhoan tk = (TaiKhoan) data;
+
+            logger.log(
+                    event
+                    + " | "
+                    + tk.getMaTaiKhoan());
+        } else {
+
+            logger.log(event);
+        }
     }
 }
