@@ -91,6 +91,19 @@ public class TaiKhoanFacade {
             String cccd,
             BigDecimal soTienConNo) {
 
+        createKhachHang(maTaiKhoan, hoTen, email, matKhau, soDienThoai, cccd, soTienConNo, "Ca nhan");
+    }
+
+    public void createKhachHang(
+            String maTaiKhoan,
+            String hoTen,
+            String email,
+            String matKhau,
+            String soDienThoai,
+            String cccd,
+            BigDecimal soTienConNo,
+            String chucVu) {
+
         TaiKhoan taiKhoan =
                 TaiKhoanFactory.createKhachHang(
                         maTaiKhoan,
@@ -99,7 +112,8 @@ public class TaiKhoanFacade {
                         matKhau,
                         soDienThoai,
                         cccd,
-                        soTienConNo);
+                        soTienConNo,
+                        chucVu);
 
         CreateTaiKhoanCommand command =
                 new CreateTaiKhoanCommand(

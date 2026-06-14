@@ -8,7 +8,7 @@ import java.awt.*;
 public class CustomerDetailFrame extends JFrame {
 
     public CustomerDetailFrame() {
-        this(new String[]{"KH001", "Nguyen Thanh Tung", "tung.nt@email.com", "001203004455", "0901234567", "Ha Noi", "Ca nhan"});
+        this(new String[]{"KH001", "Nguyen Thanh Tung", "tung.nt@email.com", "001203004455", "0901234567"});
     }
 
     public CustomerDetailFrame(String[] data) {
@@ -21,7 +21,7 @@ public class CustomerDetailFrame extends JFrame {
         JPanel page = AppUi.page("Chi tiet khach hang", "Thong tin ho so khach hang trong he thong.");
         JPanel card = AppUi.card();
         JPanel form = AppUi.form();
-        String[] labels = {"Ma KH", "Ho ten/Ten cong ty", "Email", "CCCD/MST", "So dien thoai", "Dia chi", "Loai KH"};
+        String[] labels = {"Ma KH", "Ho ten/Ten cong ty", "Email", "CCCD/MST", "So dien thoai"};
 
         for (int i = 0; i < labels.length; i++) {
             JLabel value = new JLabel(data[i]);

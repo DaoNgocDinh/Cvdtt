@@ -41,6 +41,10 @@ public class TaiKhoanFactory {
     }
 
     public static TaiKhoan createKhachHang(String maTaiKhoan, String hoTen, String email, String matKhau, String soDienThoai, String cccd, java.math.BigDecimal soTienConNo) {
+        return createKhachHang(maTaiKhoan, hoTen, email, matKhau, soDienThoai, cccd, soTienConNo, "Ca nhan");
+    }
+
+    public static TaiKhoan createKhachHang(String maTaiKhoan, String hoTen, String email, String matKhau, String soDienThoai, String cccd, java.math.BigDecimal soTienConNo, String chucVu) {
         return TaiKhoanBuilder.builder()
                 .setMaTaiKhoan(maTaiKhoan)
                 .setHoTen(hoTen)
@@ -50,6 +54,7 @@ public class TaiKhoanFactory {
                 .setSoDienThoai(soDienThoai)
                 .setCccd(cccd)
                 .setSoTienConNo(soTienConNo)
+                .setChucVu(chucVu)
                 .setRoleName("KHACHHANG")
                 .build();
     }

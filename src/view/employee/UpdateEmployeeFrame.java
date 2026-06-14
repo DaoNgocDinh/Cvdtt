@@ -16,7 +16,7 @@ public class UpdateEmployeeFrame extends JFrame {
     private final Runnable onSaved;
 
     public UpdateEmployeeFrame() {
-        this(null, new String[]{"NV001", "Nguyen Van An", "an.nv@bank.com", "Van hanh", "Giao dich vien", "EMPLOYEE", "Hoat dong"});
+        this(null, new String[]{"NV001", "Nguyen Van An", "an.nv@bank.com", "Giao dich vien", "EMPLOYEE", "Hoat dong"});
     }
 
     public UpdateEmployeeFrame(Runnable onSaved, String[] data) {
@@ -43,7 +43,7 @@ public class UpdateEmployeeFrame extends JFrame {
         txtId.setText(data[0]);
         txtName.setText(data[1]);
         txtEmail.setText(data[2]);
-        txtPosition.setText(data[4]);
+        txtPosition.setText(data[3]);
 
         AppUi.addField(form, 0, "Ma nhan vien", txtId);
         AppUi.addField(form, 1, "Ho ten", txtName);

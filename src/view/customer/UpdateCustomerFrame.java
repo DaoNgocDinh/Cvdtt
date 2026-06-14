@@ -15,16 +15,21 @@ public class UpdateCustomerFrame extends JFrame {
     private JTextField txtEmail;
     private JTextField txtIdentity;
     private JTextField txtPhone;
-    private JTextField txtAddress;
+    private final Runnable onSaved;
 
     public UpdateCustomerFrame() {
-        this(new String[]{"KH001", "Nguyen Thanh Tung", "tung.nt@email.com", "001203004455", "0901234567", "Ha Noi", "Ca nhan"});
+        this(null, new String[]{"KH001", "Nguyen Thanh Tung", "tung.nt@email.com", "001203004455", "0901234567", "Ha Noi", "Ca nhan"});
     }
 
-    public UpdateCustomerFrame(String[] data) {
+    public UpdateCustomerFrame(Runnable onSaved, String[] data) {
+        this.onSaved = onSaved;
         AppUi.setupFrame(this, "Sua khach hang", 640, 520);
         setContentPane(createContent(data));
         setVisible(true);
+    }
+
+    public UpdateCustomerFrame(String[] data) {
+        this(null, data);
     }
 
     private JComponent createContent(String[] data) {
@@ -37,21 +42,18 @@ public class UpdateCustomerFrame extends JFrame {
         txtEmail = AppUi.textField();
         txtIdentity = AppUi.textField();
         txtPhone = AppUi.textField();
-        txtAddress = AppUi.textField();
 
         txtId.setText(data[0]);
         txtName.setText(data[1]);
         txtEmail.setText(data[2]);
         txtIdentity.setText(data[3]);
         txtPhone.setText(data[4]);
-        txtAddress.setText(data[5]);
 
         AppUi.addField(form, 0, "Ma khach hang", txtId);
         AppUi.addField(form, 1, "Ho ten/Ten cong ty", txtName);
         AppUi.addField(form, 2, "Email", txtEmail);
         AppUi.addField(form, 3, "CCCD/MST", txtIdentity);
         AppUi.addField(form, 4, "So dien thoai", txtPhone);
-        AppUi.addField(form, 5, "Dia chi", txtAddress);
 
         JPanel actions = AppUi.toolbar();
         JButton save = AppUi.button("Cap nhat");
@@ -75,12 +77,16 @@ public class UpdateCustomerFrame extends JFrame {
                 taiKhoan.setMatKhau(existing.getMatKhau());
                 taiKhoan.setCccd(txtIdentity.getText().trim());
                 taiKhoan.setSoDienThoai(txtPhone.getText().trim());
-                taiKhoan.setChucVu(existing.getChucVu() != null ? existing.getChucVu() : "KHACHHANG");
+                taiKhoan.setChucVu(existing.getChucVu() != null ? existing.getChucVu() : "Ca nhan");
                 taiKhoan.setLocker(existing.getLocker());
                 taiKhoan.setRoleName(existing.getRoleName());
                 taiKhoan.setSoTienConNo(existing.getSoTienConNo());
 
                 facade.updateTaiKhoan(taiKhoan);
+
+                if (onSaved != null) {
+                    onSaved.run();
+                }
 
                 AppUi.success(this, "Cap nhat khach hang thanh cong. Audit Log da duoc ghi nhan.");
                 dispose();

@@ -115,7 +115,7 @@ public class EmployeeListFrame extends JFrame {
     }
 
     private void refreshTable() {
-        String[] columns = {"Ma NV", "Ho ten", "Email", "Phong ban", "Chuc vu", "Vai tro", "Trang thai"};
+        String[] columns = {"Ma NV", "Ho ten", "Email", "Chuc vu", "Vai tro", "Trang thai"};
         TaiKhoanFacade facade = new TaiKhoanFacade();
         java.util.List<TaiKhoan> allAccounts = facade.getAllTaiKhoan();
         java.util.List<TaiKhoan> employees = new ArrayList<>();
@@ -131,10 +131,9 @@ public class EmployeeListFrame extends JFrame {
             rows[i][0] = account.getMaTaiKhoan();
             rows[i][1] = account.getHoTen();
             rows[i][2] = account.getEmail();
-            rows[i][3] = "";
-            rows[i][4] = account.getChucVu();
-            rows[i][5] = account.getRoleName();
-            rows[i][6] = Boolean.TRUE.equals(account.getLocker()) ? "Bi khoa" : "Hoat dong";
+            rows[i][3] = account.getChucVu();
+            rows[i][4] = account.getRoleName();
+            rows[i][5] = Boolean.TRUE.equals(account.getLocker()) ? "Bi khoa" : "Hoat dong";
         }
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setDataVector(rows, columns);

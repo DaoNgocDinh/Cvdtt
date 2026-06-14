@@ -16,8 +16,14 @@ public class CreateCustomerFrame extends JFrame {
     private JTextField txtPhone;
     private JTextField txtAddress;
     private JComboBox<String> cbType;
+    private final Runnable onSaved;
 
     public CreateCustomerFrame() {
+        this(null);
+    }
+
+    public CreateCustomerFrame(Runnable onSaved) {
+        this.onSaved = onSaved;
         AppUi.setupFrame(this, "Tao tai khoan khach hang", 660, 560);
         setContentPane(createContent());
         setVisible(true);
@@ -33,7 +39,6 @@ public class CreateCustomerFrame extends JFrame {
         txtEmail = AppUi.textField();
         txtIdentity = AppUi.textField();
         txtPhone = AppUi.textField();
-        txtAddress = AppUi.textField();
         cbType = AppUi.combo("Ca nhan", "Doanh nghiep");
 
         AppUi.addField(form, 0, "Ma khach hang", txtId);
@@ -41,8 +46,7 @@ public class CreateCustomerFrame extends JFrame {
         AppUi.addField(form, 2, "Email", txtEmail);
         AppUi.addField(form, 3, "CCCD/MST", txtIdentity);
         AppUi.addField(form, 4, "So dien thoai", txtPhone);
-        AppUi.addField(form, 5, "Dia chi", txtAddress);
-        AppUi.addField(form, 6, "Loai khach hang", cbType);
+        AppUi.addField(form, 5, "Loai khach hang", cbType);
 
         JPanel actions = AppUi.toolbar();
         JButton save = AppUi.button("Tao tai khoan");
@@ -76,7 +80,12 @@ public class CreateCustomerFrame extends JFrame {
                 "123456",
                 txtPhone.getText().trim(),
                 txtIdentity.getText().trim(),
-                BigDecimal.ZERO);
+                BigDecimal.ZERO,
+                String.valueOf(cbType.getSelectedItem()));
+
+        if (onSaved != null) {
+            onSaved.run();
+        }
 
         AppUi.success(this, "Tao tai khoan khach hang thanh cong. Audit Log da duoc ghi nhan.");
         dispose();

@@ -12,7 +12,6 @@ public class CreateEmployeeFrame extends JFrame {
     private JTextField txtName;
     private JTextField txtEmail;
     private JTextField txtPhone;
-    private JTextField txtDepartment;
     private JTextField txtPosition;
     private JComboBox<String> cbRole;
     private final Runnable onSaved;
@@ -37,7 +36,6 @@ public class CreateEmployeeFrame extends JFrame {
         txtName = AppUi.textField();
         txtEmail = AppUi.textField();
         txtPhone = AppUi.textField();
-        txtDepartment = AppUi.textField();
         txtPosition = AppUi.textField();
         cbRole = AppUi.combo("ADMIN", "MANAGER", "AUDITOR", "NHANVIEN");
 
@@ -45,9 +43,8 @@ public class CreateEmployeeFrame extends JFrame {
         AppUi.addField(form, 1, "Ho ten", txtName);
         AppUi.addField(form, 2, "Email", txtEmail);
         AppUi.addField(form, 3, "So dien thoai", txtPhone);
-        AppUi.addField(form, 4, "Phong ban", txtDepartment);
-        AppUi.addField(form, 5, "Chuc vu", txtPosition);
-        AppUi.addField(form, 6, "Vai tro", cbRole);
+        AppUi.addField(form, 4, "Chuc vu", txtPosition);
+        AppUi.addField(form, 5, "Vai tro", cbRole);
 
         JPanel actions = AppUi.toolbar();
         JButton save = AppUi.button("Tao tai khoan");
@@ -65,7 +62,7 @@ public class CreateEmployeeFrame extends JFrame {
     }
 
     private void save() {
-        if (!AppUi.requireText(this, txtId, txtName, txtEmail, txtDepartment, txtPosition)) {
+        if (!AppUi.requireText(this, txtId, txtName, txtEmail, txtPhone, txtPosition)) {
             return;
         }
         if (!txtEmail.getText().contains("@")) {

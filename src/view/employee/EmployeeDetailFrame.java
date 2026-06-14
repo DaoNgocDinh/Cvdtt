@@ -8,7 +8,7 @@ import java.awt.*;
 public class EmployeeDetailFrame extends JFrame {
 
     public EmployeeDetailFrame() {
-        this(new String[]{"NV001", "Nguyen Van An", "an.nv@bank.com", "Van hanh", "Giao dich vien", "EMPLOYEE", "Hoat dong"});
+        this(new String[]{"NV001", "Nguyen Van An", "an.nv@bank.com", "Giao dich vien", "EMPLOYEE", "Hoat dong"});
     }
 
     public EmployeeDetailFrame(String[] data) {
@@ -22,7 +22,7 @@ public class EmployeeDetailFrame extends JFrame {
         JPanel card = AppUi.card();
         JPanel form = AppUi.form();
 
-        String[] labels = {"Ma nhan vien", "Ho ten", "Email", "Phong ban", "Chuc vu", "Vai tro", "Trang thai"};
+        String[] labels = {"Ma nhan vien", "Ho ten", "Email", "Chuc vu", "Vai tro", "Trang thai"};
         for (int i = 0; i < labels.length; i++) {
             JLabel value = new JLabel(data[i]);
             value.setFont(new Font("Segoe UI", Font.PLAIN, 14));

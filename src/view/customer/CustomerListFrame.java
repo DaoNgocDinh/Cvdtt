@@ -33,31 +33,15 @@ public class CustomerListFrame extends JFrame {
         toolbar.add(detail);
         toolbar.add(delete);
 
-        String[] columns = {"Ma KH", "Ho ten", "Email", "CCCD", "So dien thoai", "Dia chi", "Loai KH"};
-        
-        // Load data from database
-        TaiKhoanFacade facade = new TaiKhoanFacade();
-        List<TaiKhoan> accounts = facade.getAllTaiKhoan();
-        
-        Object[][] rows = new Object[accounts.size()][columns.length];
-        for (int i = 0; i < accounts.size(); i++) {
-            TaiKhoan account = accounts.get(i);
-            rows[i][0] = account.getMaTaiKhoan();
-            rows[i][1] = account.getHoTen();
-            rows[i][2] = account.getEmail();
-            rows[i][3] = account.getCccd();
-            rows[i][4] = account.getSoDienThoai();
-            rows[i][5] = ""; // Dia chi - not in model yet
-            rows[i][6] = account.getChucVu(); // Using ChucVu as Loai KH
-        }
-        
-        table = AppUi.table(columns, rows);
+        String[] columns = {"Ma KH", "Ho ten", "Email", "CCCD", "So dien thoai"};
+        table = AppUi.table(columns, new Object[0][0]);
+        refreshTable();
 
-        create.addActionListener(e -> new CreateCustomerFrame());
+        create.addActionListener(e -> new CreateCustomerFrame(this::refreshTable));
         update.addActionListener(e -> {
             int row = selectedRow();
             if (row >= 0) {
-                new UpdateCustomerFrame(rowData(row));
+                new UpdateCustomerFrame(this::refreshTable, rowData(row));
             }
         });
         detail.addActionListener(e -> {
@@ -70,8 +54,9 @@ public class CustomerListFrame extends JFrame {
             int row = selectedRow();
             if (row >= 0 && JOptionPane.showConfirmDialog(this, "Ban co chac muon xoa khach hang nay?", "Xac nhan", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 String maKh = String.valueOf(table.getValueAt(row, 0));
+                TaiKhoanFacade facade = new TaiKhoanFacade();
                 facade.deleteTaiKhoan(maKh);
-                ((DefaultTableModel) table.getModel()).removeRow(row);
+                refreshTable();
                 AppUi.success(this, "Xoa khach hang thanh cong. Audit Log da duoc ghi nhan.");
             }
         });
@@ -96,5 +81,30 @@ public class CustomerListFrame extends JFrame {
             data[i] = String.valueOf(table.getValueAt(row, i));
         }
         return data;
+    }
+
+    private void refreshTable() {
+        String[] columns = {"Ma KH", "Ho ten", "Email", "CCCD", "So dien thoai"};
+        TaiKhoanFacade facade = new TaiKhoanFacade();
+        java.util.List<TaiKhoan> allAccounts = facade.getAllTaiKhoan();
+        java.util.List<TaiKhoan> customers = new java.util.ArrayList<>();
+        for (TaiKhoan account : allAccounts) {
+            if (account.getRoleName() != null && account.getRoleName().equalsIgnoreCase("KHACHHANG")) {
+                customers.add(account);
+            }
+        }
+
+        Object[][] rows = new Object[customers.size()][columns.length];
+        for (int i = 0; i < customers.size(); i++) {
+            TaiKhoan account = customers.get(i);
+            rows[i][0] = account.getMaTaiKhoan();
+            rows[i][1] = account.getHoTen();
+            rows[i][2] = account.getEmail();
+            rows[i][3] = account.getCccd();
+            rows[i][4] = account.getSoDienThoai();
+        }
+
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        model.setDataVector(rows, columns);
     }
 }
