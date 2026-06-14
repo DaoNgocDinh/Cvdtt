@@ -3,39 +3,44 @@ package strategy.risk;
 import database.DatabaseConnection;
 import model.risk.RuiRo;
 import singleton.SecurityService;
-
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 
 public class RuiRoManager {
-
+    
     private RuiRoStrategy strategy;
 
     public void setStrategy(RuiRoStrategy strategy) {
         this.strategy = strategy;
-        System.out.println("[STRATEGY-RISK] Selected strategy: "
+        System.out.println("[STRATEGY-RISK] Selected strategy: " 
                 + strategy.getClass().getSimpleName());
     }
 
-    public void phatHienRuiRo(String maTaiKhoan, RuiRo ruiRo) {
+    public void danhGiaRuiRo(RuiRo ruiRo) {
         if (strategy == null) {
             System.out.println("[STRATEGY-RISK] Chua chon strategy.");
             return;
         }
 
+        // Gọi Strategy để xử lý
         strategy.danhGiaRuiRo(ruiRo);
-        luuVaoDatabase(ruiRo);
+
+        // Lấy mức độ rủi ro từ Strategy
+        String mucDo = strategy.getMucDoRuiRo();
+        System.out.println("[STRATEGY-RISK] Muc do rui ro: " + mucDo);
+
+        // Lưu vào database
+        luuVaoDatabase(ruiRo, mucDo);
 
         SecurityService.getInstance().accessFeature(
-                maTaiKhoan,
-                "Phat hien rui ro " + ruiRo.getMaRuiRo()
+                ruiRo.getMaKhoanVay() != null ? ruiRo.getMaKhoanVay() : "N/A",
+                "Danh gia rui ro " + ruiRo.getMaRuiRo()
         );
     }
 
-    private void luuVaoDatabase(RuiRo ruiRo) {
+    private void luuVaoDatabase(RuiRo ruiRo, String mucDoRuiRo) {
         String sql = "INSERT INTO RuiRo(MaRuiRo, MaKhoanVay, TenRuiRo, LoaiRuiRo, ChiTiet, NgayPhatHien) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+                   + "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -44,14 +49,16 @@ public class RuiRoManager {
             ps.setString(2, ruiRo.getMaKhoanVay());
             ps.setString(3, ruiRo.getTenRuiRo());
             ps.setString(4, ruiRo.getLoaiRuiRo());
-            ps.setString(5, ruiRo.getChiTiet());
-            ps.setDate(6, Date.valueOf(ruiRo.getNgayPhatHien()));
+            
+            // Ghi kèm mức độ rủi ro vào ChiTiet vì không muốn thêm cột mới
+            String chiTietCuoi = ruiRo.getChiTiet() 
+                    + " | Muc do rui ro: " + mucDoRuiRo;
+            ps.setString(5, chiTietCuoi);
+            
+            ps.setDate(6, java.sql.Date.valueOf(ruiRo.getNgayPhatHien()));
 
             ps.executeUpdate();
-
             System.out.println("[STRATEGY-RISK] Saved to table RuiRo successfully.");
-            System.out.println("[STRATEGY-RISK] MaRuiRo: " + ruiRo.getMaRuiRo());
-            System.out.println("[STRATEGY-RISK] MaKhoanVay: " + ruiRo.getMaKhoanVay());
 
         } catch (Exception e) {
             System.out.println("[STRATEGY-RISK] Save error: " + e.getMessage());

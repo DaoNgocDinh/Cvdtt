@@ -32,7 +32,7 @@ public class CreateLoanFrame extends JFrame {
         txtTerm = AppUi.textField();
         txtInterest = AppUi.textField();
         txtPurpose = AppUi.textArea(4);
-        cbType = AppUi.combo("Vay ca nhan", "Vay mua nha", "Vay doanh nghiep", "Vay tieu dung");
+        cbType = AppUi.combo("Vay ngan han", "Vay trung han", "Vay dai han");
 
         AppUi.addField(form, 0, "Ma khoan vay", txtLoanId);
         AppUi.addField(form, 1, "Ma khach hang", txtCustomerId);

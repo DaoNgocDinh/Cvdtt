@@ -38,6 +38,40 @@ public class TaiKhoanRepository {
         }
         return null;
     }
+    public TaiKhoan findById(String maTaiKhoan){
+
+        String sql =
+                "SELECT t.*, r.RoleName "
+                        + "FROM TaiKhoan t "
+                        + "LEFT JOIN Role r "
+                        + "ON t.MaTaiKhoan = r.MaTaiKhoan "
+                        + "WHERE t.MaTaiKhoan = ?";
+
+        try(
+                Connection conn =
+                        DatabaseConnection.getConnection();
+
+                PreparedStatement stmt =
+                        conn.prepareStatement(sql)
+        ){
+
+            stmt.setString(1, maTaiKhoan);
+
+            ResultSet rs =
+                    stmt.executeQuery();
+
+            if(rs.next()){
+
+                return mapToTaiKhoan(rs);
+            }
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     private TaiKhoan mapToTaiKhoan(ResultSet resultSet) throws SQLException {
         TaiKhoan taiKhoan = new TaiKhoan();
@@ -52,5 +86,155 @@ public class TaiKhoanRepository {
         taiKhoan.setSoTienConNo(resultSet.getBigDecimal("SoTienConNo"));
         taiKhoan.setRoleName(resultSet.getString("RoleName"));
         return taiKhoan;
+    }
+
+    public void save(TaiKhoan taiKhoan) {
+
+        String taiKhoanSql =
+                "INSERT INTO TaiKhoan "
+                        + "(MaTaiKhoan, HoTen, Email, MatKhau, ChucVu, Locker, SoDienThoai, CCCD, SoTienConNo) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        String roleSql =
+                "INSERT INTO Role "
+                        + "(MaTaiKhoan, RoleName) "
+                        + "VALUES (?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+
+            connection.setAutoCommit(false);
+
+            try {
+
+                PreparedStatement tkStmt =
+                        connection.prepareStatement(taiKhoanSql);
+
+                tkStmt.setString(1, taiKhoan.getMaTaiKhoan());
+                tkStmt.setString(2, taiKhoan.getHoTen());
+                tkStmt.setString(3, taiKhoan.getEmail());
+                tkStmt.setString(4, taiKhoan.getMatKhau());
+                tkStmt.setString(5, taiKhoan.getChucVu());
+                tkStmt.setBoolean(6, taiKhoan.getLocker());
+
+                tkStmt.setString(7, taiKhoan.getSoDienThoai());
+                tkStmt.setString(8, taiKhoan.getCccd());
+                tkStmt.setBigDecimal(9, taiKhoan.getSoTienConNo());
+
+                tkStmt.executeUpdate();
+
+                PreparedStatement roleStmt =
+                        connection.prepareStatement(roleSql);
+
+                roleStmt.setString(1, taiKhoan.getMaTaiKhoan());
+                roleStmt.setString(2, taiKhoan.getRoleName());
+
+                roleStmt.executeUpdate();
+
+                connection.commit();
+
+            } catch (Exception ex) {
+
+                connection.rollback();
+                throw ex;
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(
+            String maTaiKhoan){
+
+        String roleSql =
+                "DELETE FROM Role "
+                        + "WHERE MaTaiKhoan=?";
+
+        String accountSql =
+                "DELETE FROM TaiKhoan "
+                        + "WHERE MaTaiKhoan=?";
+
+        try(
+                Connection conn =
+                        DatabaseConnection.getConnection()
+        ){
+
+            conn.setAutoCommit(false);
+
+            try{
+
+                PreparedStatement roleStmt =
+                        conn.prepareStatement(
+                                roleSql);
+
+                roleStmt.setString(
+                        1,
+                        maTaiKhoan);
+
+                roleStmt.executeUpdate();
+
+                PreparedStatement accStmt =
+                        conn.prepareStatement(
+                                accountSql);
+
+                accStmt.setString(
+                        1,
+                        maTaiKhoan);
+
+                accStmt.executeUpdate();
+
+                conn.commit();
+
+            }catch(Exception ex){
+
+                conn.rollback();
+
+                throw ex;
+            }
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
+    }
+
+    public void update(TaiKhoan taiKhoan) {
+
+        String sql =
+                "UPDATE TaiKhoan "
+                        + "SET HoTen = ?, "
+                        + "Email = ?, "
+                        + "MatKhau = ?, "
+                        + "ChucVu = ?, "
+                        + "Locker = ?, "
+                        + "SoDienThoai = ?, "
+                        + "CCCD = ?, "
+                        + "SoTienConNo = ? "
+                        + "WHERE MaTaiKhoan = ?";
+
+        try (Connection connection =
+                     DatabaseConnection.getConnection();
+
+             PreparedStatement stmt =
+                     connection.prepareStatement(sql)) {
+
+            stmt.setString(1, taiKhoan.getHoTen());
+            stmt.setString(2, taiKhoan.getEmail());
+            stmt.setString(3, taiKhoan.getMatKhau());
+            stmt.setString(4, taiKhoan.getChucVu());
+            stmt.setBoolean(5, taiKhoan.getLocker());
+            stmt.setString(6, taiKhoan.getSoDienThoai());
+            stmt.setString(7, taiKhoan.getCccd());
+            stmt.setBigDecimal(8, taiKhoan.getSoTienConNo());
+
+            stmt.setString(9, taiKhoan.getMaTaiKhoan());
+
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
     }
 }
