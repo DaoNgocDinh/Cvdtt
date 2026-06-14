@@ -1,73 +1,159 @@
 package view.loan;
 
-import view.common.AppUi;
+import facade.VayFacade;
 
 import javax.swing.*;
 import java.awt.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class CreateLoanFrame extends JFrame {
 
-    private JTextField txtLoanId;
-    private JTextField txtCustomerId;
-    private JTextField txtAmount;
-    private JTextField txtTerm;
-    private JTextField txtInterest;
-    private JTextArea txtPurpose;
-    private JComboBox<String> cbType;
+    private JTextField txtMaKhoanVay;
+    private JTextField txtMaTaiKhoan;
+    private JTextField txtSoTienVay;
+    private JTextField txtHanTraNo;
 
-    public CreateLoanFrame() {
-        AppUi.setupFrame(this, "Tao khoan vay", 700, 620);
-        setContentPane(createContent());
-        setVisible(true);
+    private VayFacade facade;
+
+    public CreateLoanFrame(VayFacade facade) {
+
+        this.facade = facade;
+
+        setTitle("QUẢN LÝ KHOẢN VAY");
+        setSize(450, 420);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        initUI();
     }
 
-    private JComponent createContent() {
-        JPanel page = AppUi.page("Tao khoan vay", "Nhap thong tin khoan vay va chay quy trinh kiem tra truoc khi luu.");
-        JPanel card = AppUi.card();
-        JPanel form = AppUi.form();
+    private void initUI() {
 
-        txtLoanId = AppUi.textField();
-        txtCustomerId = AppUi.textField();
-        txtAmount = AppUi.textField();
-        txtTerm = AppUi.textField();
-        txtInterest = AppUi.textField();
-        txtPurpose = AppUi.textArea(4);
-        cbType = AppUi.combo("Vay ca nhan", "Vay mua nha", "Vay doanh nghiep", "Vay tieu dung");
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 2, 10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 
-        AppUi.addField(form, 0, "Ma khoan vay", txtLoanId);
-        AppUi.addField(form, 1, "Ma khach hang", txtCustomerId);
-        AppUi.addField(form, 2, "So tien vay", txtAmount);
-        AppUi.addField(form, 3, "Thoi han vay", txtTerm);
-        AppUi.addField(form, 4, "Lai suat", txtInterest);
-        AppUi.addField(form, 5, "Loai khoan vay", cbType);
-        AppUi.addField(form, 6, "Muc dich vay", new JScrollPane(txtPurpose));
+        panel.add(new JLabel("Mã khoản vay:"));
+        txtMaKhoanVay = new JTextField();
+        panel.add(txtMaKhoanVay);
 
-        JPanel actions = AppUi.toolbar();
-        JButton searchCustomer = AppUi.secondaryButton("Tim khach hang");
-        JButton save = AppUi.button("Tao khoan vay");
-        JButton cancel = AppUi.secondaryButton("Huy");
-        actions.add(searchCustomer);
-        actions.add(save);
-        actions.add(cancel);
+        panel.add(new JLabel("Mã tài khoản:"));
+        txtMaTaiKhoan = new JTextField();
+        panel.add(txtMaTaiKhoan);
 
-        searchCustomer.addActionListener(e -> {
-            txtCustomerId.setText("KH001");
-            AppUi.success(this, "Da chon khach hang KH001 va tu dong dien vao ho so vay.");
+        panel.add(new JLabel("Số tiền vay:"));
+        txtSoTienVay = new JTextField();
+        panel.add(txtSoTienVay);
+
+        panel.add(new JLabel("Hạn trả (yyyy-mm-dd):"));
+        txtHanTraNo = new JTextField();
+        panel.add(txtHanTraNo);
+
+        // =========================
+        // MESSAGE (ĐƯA LÊN TRÊN BUTTON)
+        // =========================
+        JLabel result = new JLabel(" ");
+        result.setFont(new Font("Arial", Font.BOLD, 12));
+        result.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // =========================
+        // BUTTON
+        // =========================
+        JButton btnCreate = new JButton("TẠO KHOẢN VAY");
+        btnCreate.setBackground(new Color(0, 153, 76));
+        btnCreate.setForeground(Color.WHITE);
+        btnCreate.setFocusPainted(false);
+
+        btnCreate.addActionListener(e -> {
+
+            try {
+                if (txtMaKhoanVay.getText().trim().isEmpty()
+                        || txtMaTaiKhoan.getText().trim().isEmpty()
+                        || txtSoTienVay.getText().trim().isEmpty()
+                        || txtHanTraNo.getText().trim().isEmpty()) {
+
+                    showError(result, "Vui lòng nhập đầy đủ thông tin");
+                    return;
+                }
+
+                BigDecimal soTien;
+                try {
+                    soTien = new BigDecimal(txtSoTienVay.getText().trim());
+                } catch (Exception ex) {
+                    showError(result, "Số tiền không hợp lệ");
+                    return;
+                }
+
+                LocalDate hanTra;
+                try {
+                    hanTra = LocalDate.parse(txtHanTraNo.getText().trim());
+                } catch (Exception ex) {
+                    showError(result, "Ngày không đúng định dạng yyyy-mm-dd");
+                    return;
+                }
+
+                LocalDate ngayVay = LocalDate.now();
+
+                facade.createVay(
+                        txtMaKhoanVay.getText().trim(),
+                        txtMaTaiKhoan.getText().trim(),
+                        soTien,
+                        ngayVay,
+                        hanTra
+                );
+
+                showSuccess(result, "Tạo khoản vay thành công");
+                btnCreate.setEnabled(false);
+
+// reset form (tuỳ chọn nhưng nên có)
+                txtMaKhoanVay.setText("");
+                txtMaTaiKhoan.setText("");
+                txtSoTienVay.setText("");
+                txtHanTraNo.setText("");
+
+// tự ẩn message + bật lại nút sau 2 giây
+                new javax.swing.Timer(2000, ev -> {
+                    result.setText(" ");
+                    btnCreate.setEnabled(true);
+                }).start();
+
+            } catch (Exception ex) {
+                showError(result, ex.getMessage());
+            }
         });
-        save.addActionListener(e -> save());
-        cancel.addActionListener(e -> dispose());
 
-        card.add(form, BorderLayout.CENTER);
-        card.add(actions, BorderLayout.SOUTH);
-        page.add(card, BorderLayout.CENTER);
-        return page;
+        // =========================
+        // LAYOUT BUTTON + MESSAGE
+        // =========================
+        JPanel bottom = new JPanel();
+        bottom.setLayout(new BoxLayout(bottom, BoxLayout.Y_AXIS));
+        bottom.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
+
+        bottom.add(result);
+        bottom.add(Box.createVerticalStrut(10));
+        bottom.add(btnCreate);
+
+        add(panel, BorderLayout.CENTER);
+        add(bottom, BorderLayout.SOUTH);
     }
 
-    private void save() {
-        if (!AppUi.requireText(this, txtLoanId, txtCustomerId, txtAmount, txtTerm, txtInterest)) {
-            return;
-        }
-        AppUi.success(this, "Tao khoan vay thanh cong. Chuoi kiem tra da hoan tat, Audit Log va thong bao da duoc ghi nhan.");
-        dispose();
+    // =========================
+    // HELPER UI METHODS
+    // =========================
+    private void showError(JLabel label, String msg) {
+        label.setForeground(Color.RED);
+        label.setText("✖ " + msg);
+    }
+
+    private void showSuccess(JLabel label, String msg) {
+        label.setForeground(new Color(0, 150, 0));
+        label.setText("✔ " + msg);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() ->
+                new CreateLoanFrame(new VayFacade()).setVisible(true)
+        );
     }
 }

@@ -1,10 +1,10 @@
 package view.dashboard;
 
+import facade.VayFacade;
 import view.audit.AuditLogFrame;
 import view.auth.LoginFrame;
 import view.customer.CustomerListFrame;
 import view.employee.EmployeeListFrame;
-import view.loan.LoanListFrame;
 import view.notification.NotificationFrame;
 import view.permission.PermissionFrame;
 import view.risk.RiskAlertFrame;
@@ -17,6 +17,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import view.loan.CreateLoanFrame;
+import view.loan.LoanListFrame;
 
 public class DashboardFrame extends JFrame {
 

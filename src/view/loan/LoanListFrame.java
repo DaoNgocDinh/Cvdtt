@@ -1,5 +1,6 @@
 package view.loan;
 
+import facade.VayFacade;
 import utils.Authorization;
 import view.common.AppUi;
 
@@ -40,7 +41,7 @@ public class LoanListFrame extends JFrame {
 
         create.addActionListener(e -> {
             if (Authorization.requireAnyRole(this, "ADMIN", "NHANVIEN")) {
-                new CreateLoanFrame();
+                new CreateLoanFrame(new VayFacade()).setVisible(true);
             }
         });
         detail.addActionListener(e -> {
