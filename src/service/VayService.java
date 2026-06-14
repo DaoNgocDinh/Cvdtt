@@ -1,20 +1,16 @@
 package service;
 
-import database.DatabaseConnection;
-import model.account.TaiKhoan;
-import model.loan.Vay;
-import repository.TaiKhoanRepository;
-import repository.VayRepository;
-import java.sql.Connection;
-import java.math.BigDecimal;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.List;
+import chainofresponsibility.risk.*;
 import decorator.audit.AlertDecorator;
 import decorator.audit.AuditLogger;
 import decorator.audit.BasicAuditLogger;
 import decorator.audit.SecurityDecorator;
-import chainofresponsibility.risk.*;
+import java.math.BigDecimal;
+import java.util.List;
+import model.account.TaiKhoan;
+import model.loan.Vay;
+import repository.TaiKhoanRepository;
+import repository.VayRepository;
 
 public class VayService {
 
