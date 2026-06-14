@@ -1,0 +1,120 @@
+package facade;
+
+import command.TaiKhoan.CreateTaiKhoanCommand;
+import factory.TaiKhoanFactory;
+import model.account.TaiKhoan;
+import service.TaiKhoanService;
+import command.TaiKhoan.DeleteTaiKhoanCommand;
+import command.TaiKhoan.UpdateTaiKhoanCommand;
+
+import java.math.BigDecimal;
+
+public class TaiKhoanFacade {
+    private TaiKhoanService taiKhoanService;
+
+    public TaiKhoanFacade() {
+        taiKhoanService = new TaiKhoanService();
+    }
+
+    // ==========================
+    // ADMIN
+    // ==========================
+
+    public void createAdmin(
+            String maTaiKhoan,
+            String hoTen,
+            String email,
+            String matKhau) {
+
+        TaiKhoan taiKhoan =
+                TaiKhoanFactory.createAdmin(
+                        maTaiKhoan,
+                        hoTen,
+                        email,
+                        matKhau);
+
+        CreateTaiKhoanCommand command =
+                new CreateTaiKhoanCommand(
+                        taiKhoanService,
+                        taiKhoan);
+
+        command.execute();
+    }
+
+    // ==========================
+    // NHAN VIEN
+    // ==========================
+
+    public void createNhanVien(
+            String maTaiKhoan,
+            String hoTen,
+            String email,
+            String matKhau) {
+
+        TaiKhoan taiKhoan =
+                TaiKhoanFactory.createNhanVien(
+                        maTaiKhoan,
+                        hoTen,
+                        email,
+                        matKhau);
+
+        CreateTaiKhoanCommand command =
+                new CreateTaiKhoanCommand(
+                        taiKhoanService,
+                        taiKhoan);
+
+        command.execute();
+    }
+
+    // ==========================
+    // KHACH HANG
+    // ==========================
+
+    public void createKhachHang(
+            String maTaiKhoan,
+            String hoTen,
+            String email,
+            String matKhau,
+            String soDienThoai,
+            String cccd,
+            BigDecimal soTienConNo) {
+
+        TaiKhoan taiKhoan =
+                TaiKhoanFactory.createKhachHang(
+                        maTaiKhoan,
+                        hoTen,
+                        email,
+                        matKhau,
+                        soDienThoai,
+                        cccd,
+                        soTienConNo);
+
+        CreateTaiKhoanCommand command =
+                new CreateTaiKhoanCommand(
+                        taiKhoanService,
+                        taiKhoan);
+
+        command.execute();
+    }
+
+    public void deleteTaiKhoan(String maTaiKhoan) {
+
+        DeleteTaiKhoanCommand command =
+                new DeleteTaiKhoanCommand(
+                        taiKhoanService,
+                        maTaiKhoan);
+
+        command.execute();
+    }
+
+    public void updateTaiKhoan(
+            TaiKhoan taiKhoan) {
+
+        UpdateTaiKhoanCommand command =
+                new UpdateTaiKhoanCommand(
+                        taiKhoanService,
+                        taiKhoan);
+
+        command.execute();
+    }
+}

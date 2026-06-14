@@ -53,4 +53,141 @@ public class TaiKhoanRepository {
         taiKhoan.setRoleName(resultSet.getString("RoleName"));
         return taiKhoan;
     }
+
+    public void save(TaiKhoan taiKhoan) {
+
+        String taiKhoanSql =
+                "INSERT INTO TaiKhoan "
+                        + "(MaTaiKhoan, HoTen, Email, MatKhau, ChucVu, Locker, SoDienThoai, CCCD, SoTienConNo) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        String roleSql =
+                "INSERT INTO Role "
+                        + "(MaTaiKhoan, RoleName) "
+                        + "VALUES (?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+
+            connection.setAutoCommit(false);
+
+            try {
+
+                PreparedStatement tkStmt =
+                        connection.prepareStatement(taiKhoanSql);
+
+                tkStmt.setString(1, taiKhoan.getMaTaiKhoan());
+                tkStmt.setString(2, taiKhoan.getHoTen());
+                tkStmt.setString(3, taiKhoan.getEmail());
+                tkStmt.setString(4, taiKhoan.getMatKhau());
+                tkStmt.setString(5, taiKhoan.getChucVu());
+                tkStmt.setBoolean(6, taiKhoan.getLocker());
+
+                tkStmt.setString(7, taiKhoan.getSoDienThoai());
+                tkStmt.setString(8, taiKhoan.getCccd());
+                tkStmt.setBigDecimal(9, taiKhoan.getSoTienConNo());
+
+                tkStmt.executeUpdate();
+
+                PreparedStatement roleStmt =
+                        connection.prepareStatement(roleSql);
+
+                roleStmt.setString(1, taiKhoan.getMaTaiKhoan());
+                roleStmt.setString(2, taiKhoan.getRoleName());
+
+                roleStmt.executeUpdate();
+
+                connection.commit();
+
+            } catch (Exception ex) {
+
+                connection.rollback();
+                throw ex;
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(String maTaiKhoan) {
+
+        String deleteRoleSql =
+                "DELETE FROM Role WHERE MaTaiKhoan = ?";
+
+        String deleteTaiKhoanSql =
+                "DELETE FROM TaiKhoan WHERE MaTaiKhoan = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection()) {
+
+            connection.setAutoCommit(false);
+
+            try {
+
+                // Xóa role trước
+                PreparedStatement roleStmt =
+                        connection.prepareStatement(deleteRoleSql);
+
+                roleStmt.setString(1, maTaiKhoan);
+                roleStmt.executeUpdate();
+
+                // Xóa tài khoản
+                PreparedStatement tkStmt =
+                        connection.prepareStatement(deleteTaiKhoanSql);
+
+                tkStmt.setString(1, maTaiKhoan);
+                tkStmt.executeUpdate();
+
+                connection.commit();
+
+            } catch (Exception ex) {
+
+                connection.rollback();
+                throw ex;
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
+
+    public void update(TaiKhoan taiKhoan) {
+
+        String sql =
+                "UPDATE TaiKhoan "
+                        + "SET HoTen = ?, "
+                        + "Email = ?, "
+                        + "MatKhau = ?, "
+                        + "ChucVu = ?, "
+                        + "Locker = ?, "
+                        + "SoDienThoai = ?, "
+                        + "CCCD = ?, "
+                        + "SoTienConNo = ? "
+                        + "WHERE MaTaiKhoan = ?";
+
+        try (Connection connection =
+                     DatabaseConnection.getConnection();
+
+             PreparedStatement stmt =
+                     connection.prepareStatement(sql)) {
+
+            stmt.setString(1, taiKhoan.getHoTen());
+            stmt.setString(2, taiKhoan.getEmail());
+            stmt.setString(3, taiKhoan.getMatKhau());
+            stmt.setString(4, taiKhoan.getChucVu());
+            stmt.setBoolean(5, taiKhoan.getLocker());
+            stmt.setString(6, taiKhoan.getSoDienThoai());
+            stmt.setString(7, taiKhoan.getCccd());
+            stmt.setBigDecimal(8, taiKhoan.getSoTienConNo());
+
+            stmt.setString(9, taiKhoan.getMaTaiKhoan());
+
+            stmt.executeUpdate();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+    }
 }
