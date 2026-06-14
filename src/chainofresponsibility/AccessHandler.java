@@ -4,7 +4,8 @@
  */
 package chainofresponsibility;
 
-import model.employee.Employee;
+import model.account.TaiKhoan;
+
 /**
  *
  * @author FPTSHOP
@@ -17,5 +18,5 @@ public abstract class AccessHandler {
         this.nextHandler = nextHandler;
     }
 
-    public abstract boolean handle(Employee employee);
+    public abstract boolean handle(TaiKhoan taikhoan);
 }

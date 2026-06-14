@@ -230,7 +230,6 @@ public class DashboardFrame extends JFrame {
         modules.add(createModuleCard("Risk", "Risk alerts", "R", new Color(220, 38, 38), () -> new RiskAlertFrame()));
         modules.add(createModuleCard("Audit Log", "System activity", "A", new Color(217, 119, 6), () -> new AuditLogFrame()));
         modules.add(createModuleCard("Notification", "Internal messages", "N", new Color(6, 182, 212), () -> new NotificationFrame()));
-        modules.add(createModuleCard("Report", "System statistics", "B", new Color(15, 118, 110), () -> new ReportFrame()));
 
         return modules;
     }

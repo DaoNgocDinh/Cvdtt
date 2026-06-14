@@ -4,18 +4,10 @@
  */
 package chainofresponsibility;
 
-import model.customer.Customer;
-
 /**
  *
  * @author FPTSHOP
  */
 public abstract class CustomerHandler {
-    protected CustomerHandler nextHandler;
 
-    public void setNextHandler(CustomerHandler nextHandler) {
-        this.nextHandler = nextHandler;
-    }
-
-    public abstract boolean handle(Customer customer);
 }

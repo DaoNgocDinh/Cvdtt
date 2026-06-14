@@ -4,7 +4,7 @@
  */
 package decorator;
 
-import model.employee.Employee;
+import model.account.TaiKhoan;
 import service.EmployeeService;
 
 /**
@@ -21,9 +21,9 @@ public class AuditLogDecorator
     }
 
     @Override
-    public void createEmployee(Employee employee) {
+    public void createEmployee(TaiKhoan taikhoan) {
 
-        service.createEmployee(employee);
+        service.createEmployee(taikhoan);
 
         System.out.println(
                 "[Audit] Ghi log tạo nhân viên"

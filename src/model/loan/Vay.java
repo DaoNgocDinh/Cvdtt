@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class Vay {
 
     private String maKhoanVay;
+    private String maTaiKhoan;
     private LocalDate ngayVay;
     private BigDecimal soTienVay;
     private LocalDate hanTraNo;
@@ -24,6 +25,14 @@ public class Vay {
 
     public void setMaKhoanVay(String maKhoanVay) {
         this.maKhoanVay = maKhoanVay;
+    }
+
+    public String getMaTaiKhoan() {
+        return maTaiKhoan;
+    }
+
+    public void setMaTaiKhoan(String maTaiKhoan) {
+        this.maTaiKhoan = maTaiKhoan;
     }
 
     public LocalDate getNgayVay() {

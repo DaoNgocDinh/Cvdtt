@@ -19,14 +19,15 @@ import java.sql.SQLException;
  */
 public class TaiKhoanRepository {
 
-    private static final String FIND_BY_USERNAME_SQL = "SELECT t.MaTaiKhoan, t.HoTen, t.Email, t.ChucVu, t.Locker, t.SoDienThoai, t.CCCD, t.SoTienConNo, r.RoleName " +
+    private static final String FIND_BY_USERNAME_AND_PASSWORD_SQL = "SELECT t.MaTaiKhoan, t.HoTen, t.Email, t.MatKhau, t.ChucVu, t.Locker, t.SoDienThoai, t.CCCD, t.SoTienConNo, r.RoleName " +
             "FROM TaiKhoan t LEFT JOIN Role r ON t.MaTaiKhoan = r.MaTaiKhoan " +
-            "WHERE t.MaTaiKhoan = ?";
+            "WHERE t.MaTaiKhoan = ? AND t.MatKhau = ?";
 
-    public TaiKhoan findByUsername(String username) {
+    public TaiKhoan findByUsernameAndPassword(String username, String password) {
         try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_BY_USERNAME_SQL)) {
+             PreparedStatement statement = connection.prepareStatement(FIND_BY_USERNAME_AND_PASSWORD_SQL)) {
             statement.setString(1, username);
+            statement.setString(2, password);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     return mapToTaiKhoan(resultSet);
@@ -43,6 +44,7 @@ public class TaiKhoanRepository {
         taiKhoan.setMaTaiKhoan(resultSet.getString("MaTaiKhoan"));
         taiKhoan.setHoTen(resultSet.getString("HoTen"));
         taiKhoan.setEmail(resultSet.getString("Email"));
+        taiKhoan.setMatKhau(resultSet.getString("MatKhau"));
         taiKhoan.setChucVu(resultSet.getString("ChucVu"));
         taiKhoan.setLocker(resultSet.getBoolean("Locker"));
         taiKhoan.setSoDienThoai(resultSet.getString("SoDienThoai"));

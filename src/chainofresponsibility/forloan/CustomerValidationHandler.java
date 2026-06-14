@@ -5,15 +5,7 @@
 package chainofresponsibility.forloan;
 
 import chainofresponsibility.CustomerHandler;
-import model.customer.Customer;
 
 public class CustomerValidationHandler extends CustomerHandler {
 
-    @Override
-    public boolean handle(Customer customer) {
-        
-        
-        System.out.println("Khach hang co trong he thong");
-        return true;
-    }
 }

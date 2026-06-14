@@ -6,7 +6,8 @@ package chainofresponsibility.forusermanagerment;
  */
 
 import chainofresponsibility.AccessHandler;
-import model.employee.Employee;
+import model.account.TaiKhoan;
+
 /**
  *
  * @author FPTSHOP
@@ -14,7 +15,7 @@ import model.employee.Employee;
 public class PermissionValidationHandler extends AccessHandler {
 
     @Override
-    public boolean handle(Employee employee) {
+    public boolean handle(TaiKhoan taikhoan) {
 
         System.out.println("Kiem tra quyen truy cap");
 

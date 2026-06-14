@@ -5,8 +5,7 @@
 package chainofresponsibility.forusermanagerment;
 
 import chainofresponsibility.AccessHandler;
-import model.employee.Employee;
-import model.employee.EmployeeState;
+import model.account.TaiKhoan;
 
 /**
  *
@@ -15,9 +14,9 @@ import model.employee.EmployeeState;
 public class AccountStatusHandler extends AccessHandler {
 
     @Override
-    public boolean handle(Employee employee) {
+    public boolean handle(TaiKhoan taikhoan) {
 
-        if (employee.getState() == EmployeeState.SUSPENDED) {
+        if (taikhoan.getLocker()) {
 
             System.out.println("Tai khoan bi khoa");
             return false;
@@ -26,7 +25,7 @@ public class AccountStatusHandler extends AccessHandler {
         System.out.println("Tai khoan hop le");
 
         if (nextHandler != null) {
-            return nextHandler.handle(employee);
+            return nextHandler.handle(taikhoan);
         }
 
         return true;

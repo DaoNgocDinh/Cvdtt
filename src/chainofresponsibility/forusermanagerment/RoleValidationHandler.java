@@ -6,7 +6,7 @@ package chainofresponsibility.forusermanagerment;
  */
 
 import chainofresponsibility.AccessHandler;
-import model.employee.Employee;
+import model.account.TaiKhoan;
 /**
  *
  * @author FPTSHOP
@@ -14,18 +14,18 @@ import model.employee.Employee;
 public class RoleValidationHandler extends AccessHandler {
 
     @Override
-    public boolean handle(Employee employee) {
+    public boolean handle(TaiKhoan taikhoan) {
 
-        if (employee.getRole() == null) {
+        if (taikhoan.getRoleName() == "ADMIN") {
 
             System.out.println("Chua duoc cap quyen");
             return false;
         }
 
-        System.out.println("Vai tro: " + employee.getRole());
+        System.out.println("Vai tro: " + taikhoan.getRoleName());
 
         if (nextHandler != null) {
-            return nextHandler.handle(employee);
+            return nextHandler.handle(taikhoan);
         }
 
         return true;

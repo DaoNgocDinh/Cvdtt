@@ -5,7 +5,7 @@
 package chainofresponsibility.forusermanagerment;
 
 import chainofresponsibility.AccessHandler;
-import model.employee.Employee;
+import model.account.TaiKhoan;
 
 /**
  *
@@ -14,9 +14,9 @@ import model.employee.Employee;
 public class AuthenticationHandler extends AccessHandler {
 
     @Override
-    public boolean handle(Employee employee) {
+    public boolean handle(TaiKhoan taikhoan) {
 
-        if (employee == null) {
+        if (taikhoan == null) {
             System.out.println("Sai tai khoan hoac mat khau");
             return false;
         }
@@ -24,7 +24,7 @@ public class AuthenticationHandler extends AccessHandler {
         System.out.println("Xac thuc thanh cong");
 
         if (nextHandler != null) {
-            return nextHandler.handle(employee);
+            return nextHandler.handle(taikhoan);
         }
 
         return true;

@@ -4,7 +4,7 @@
  */
 package decorator;
 
-import model.employee.Employee;
+import model.account.TaiKhoan;
 import service.EmployeeService;
 
 /**
@@ -21,12 +21,12 @@ public class SecurityDecorator
     }
 
     @Override
-    public void createEmployee(Employee employee) {
+    public void createEmployee(TaiKhoan taikhoan) {
 
         System.out.println(
                 "[Security] Kiểm tra quyền Admin"
         );
 
-        service.createEmployee(employee);
+        service.createEmployee(taikhoan);
     }
 }

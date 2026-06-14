@@ -4,7 +4,7 @@
  */
 package service;
 
-import model.employee.Employee;
+import model.account.TaiKhoan;
 
 /**
  *
@@ -12,5 +12,5 @@ import model.employee.Employee;
  */
 public interface EmployeeService {
 
-    void createEmployee(Employee employee);
+    void createEmployee(TaiKhoan taikhoan);
 }

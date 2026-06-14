@@ -11,18 +11,16 @@ import chainofresponsibility.forusermanagerment.AccountStatusHandler;
 import chainofresponsibility.forusermanagerment.AuthenticationHandler;
 import chainofresponsibility.forusermanagerment.PermissionValidationHandler;
 import chainofresponsibility.forusermanagerment.RoleValidationHandler;
-import model.employee.Employee;
-import model.employee.EmployeeState;
-
+import model.account.TaiKhoan;
 public class TestCoR {
 
     public static void main(String[] args) {
 
-        Employee employee = new Employee();
+        TaiKhoan employee = new TaiKhoan();
 
-        employee.setUsername("admin");
-        employee.setRole("NHANVIEN");
-        employee.setState(EmployeeState.SUSPENDED);
+        employee.setHoTen("admin");
+        employee.setRoleName("ADMIN");
+        employee.setLocker(Boolean.FALSE);
 
         AccessHandler auth
                 = new AuthenticationHandler();

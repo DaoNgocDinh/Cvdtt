@@ -6,7 +6,7 @@ package main;
 
 import decorator.AuditLogDecorator;
 import decorator.SecurityDecorator;
-import model.employee.Employee;
+import model.account.TaiKhoan;
 import service.EmployeeService;
 import service.EmployeeServiceImpl;
 
@@ -14,8 +14,8 @@ public class TestDecorator {
 
     public static void main(String[] args) {
 
-        Employee employee = new Employee();
-        employee.setFullName("Nguyen Van A");
+        TaiKhoan employee = new TaiKhoan();
+        employee.setHoTen("Nguyen Van A");
 
         EmployeeService service
                 = new EmployeeServiceImpl();
