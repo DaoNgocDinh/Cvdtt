@@ -91,9 +91,14 @@ public class TestSingletonStrategyMain {
         ruiRoTinDung.setChiTiet("Khach hang co so tien con no cao");
         ruiRoTinDung.setNgayPhatHien(LocalDate.now());
 
+        RuiRoTinDungStrategy tinDungStrategy = new RuiRoTinDungStrategy();
+
         RuiRoManager ruiRoManager1 = new RuiRoManager();
-        ruiRoManager1.setStrategy(new RuiRoTinDungStrategy());
+        ruiRoManager1.setStrategy(tinDungStrategy);
         ruiRoManager1.phatHienRuiRo("AD001", ruiRoTinDung);
+
+        System.out.println(">>> Muc do rui ro: "
+                + tinDungStrategy.getMucDoRuiRo());
 
 
         RuiRo ruiRoThanhToan = new RuiRo();
@@ -102,9 +107,15 @@ public class TestSingletonStrategyMain {
         ruiRoThanhToan.setChiTiet("Khach hang cham thanh toan");
         ruiRoThanhToan.setNgayPhatHien(LocalDate.now());
 
+        RuiRoThanhToanStrategy thanhToanStrategy
+                = new RuiRoThanhToanStrategy();
+
         RuiRoManager ruiRoManager2 = new RuiRoManager();
-        ruiRoManager2.setStrategy(new RuiRoThanhToanStrategy());
+        ruiRoManager2.setStrategy(thanhToanStrategy);
         ruiRoManager2.phatHienRuiRo("AD001", ruiRoThanhToan);
+
+        System.out.println(">>> Muc do rui ro: "
+                + thanhToanStrategy.getMucDoRuiRo());
 
 
         RuiRo ruiRoHoSo = new RuiRo();
@@ -113,9 +124,15 @@ public class TestSingletonStrategyMain {
         ruiRoHoSo.setChiTiet("Ho so vay thieu giay to");
         ruiRoHoSo.setNgayPhatHien(LocalDate.now());
 
+        RuiRoHoSoStrategy hoSoStrategy
+                = new RuiRoHoSoStrategy();
+
         RuiRoManager ruiRoManager3 = new RuiRoManager();
-        ruiRoManager3.setStrategy(new RuiRoHoSoStrategy());
+        ruiRoManager3.setStrategy(hoSoStrategy);
         ruiRoManager3.phatHienRuiRo("AD001", ruiRoHoSo);
+
+        System.out.println(">>> Muc do rui ro: "
+                + hoSoStrategy.getMucDoRuiRo());
 
 
         RuiRo ruiRoBaoMat = new RuiRo();
@@ -124,9 +141,15 @@ public class TestSingletonStrategyMain {
         ruiRoBaoMat.setChiTiet("Truy cap bat thuong vao ho so khoan vay");
         ruiRoBaoMat.setNgayPhatHien(LocalDate.now());
 
+        RuiRoBaoMatStrategy baoMatStrategy
+                = new RuiRoBaoMatStrategy();
+
         RuiRoManager ruiRoManager4 = new RuiRoManager();
-        ruiRoManager4.setStrategy(new RuiRoBaoMatStrategy());
+        ruiRoManager4.setStrategy(baoMatStrategy);
         ruiRoManager4.phatHienRuiRo("AD001", ruiRoBaoMat);
+
+        System.out.println(">>> Muc do rui ro: "
+                + baoMatStrategy.getMucDoRuiRo());
 
 
         // ==========================
