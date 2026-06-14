@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package builder;
 
 import java.math.BigDecimal;
@@ -9,11 +5,11 @@ import java.time.LocalDate;
 import model.loan.Vay;
 
 /**
- * Builder for the Vay model matching the SQL table schema.
+ * Builder for Vay
  */
 public class VayBuilder {
 
-    private Vay vay;
+    private final Vay vay;
 
     private VayBuilder() {
         this.vay = new Vay();
