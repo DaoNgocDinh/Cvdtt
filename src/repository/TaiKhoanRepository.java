@@ -38,6 +38,40 @@ public class TaiKhoanRepository {
         }
         return null;
     }
+    public TaiKhoan findById(String maTaiKhoan){
+
+        String sql =
+                "SELECT t.*, r.RoleName "
+                        + "FROM TaiKhoan t "
+                        + "LEFT JOIN Role r "
+                        + "ON t.MaTaiKhoan = r.MaTaiKhoan "
+                        + "WHERE t.MaTaiKhoan = ?";
+
+        try(
+                Connection conn =
+                        DatabaseConnection.getConnection();
+
+                PreparedStatement stmt =
+                        conn.prepareStatement(sql)
+        ){
+
+            stmt.setString(1, maTaiKhoan);
+
+            ResultSet rs =
+                    stmt.executeQuery();
+
+            if(rs.next()){
+
+                return mapToTaiKhoan(rs);
+            }
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     private TaiKhoan mapToTaiKhoan(ResultSet resultSet) throws SQLException {
         TaiKhoan taiKhoan = new TaiKhoan();
@@ -110,43 +144,56 @@ public class TaiKhoanRepository {
         }
     }
 
-    public void delete(String maTaiKhoan) {
+    public void delete(
+            String maTaiKhoan){
 
-        String deleteRoleSql =
-                "DELETE FROM Role WHERE MaTaiKhoan = ?";
+        String roleSql =
+                "DELETE FROM Role "
+                        + "WHERE MaTaiKhoan=?";
 
-        String deleteTaiKhoanSql =
-                "DELETE FROM TaiKhoan WHERE MaTaiKhoan = ?";
+        String accountSql =
+                "DELETE FROM TaiKhoan "
+                        + "WHERE MaTaiKhoan=?";
 
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try(
+                Connection conn =
+                        DatabaseConnection.getConnection()
+        ){
 
-            connection.setAutoCommit(false);
+            conn.setAutoCommit(false);
 
-            try {
+            try{
 
-                // Xóa role trước
                 PreparedStatement roleStmt =
-                        connection.prepareStatement(deleteRoleSql);
+                        conn.prepareStatement(
+                                roleSql);
 
-                roleStmt.setString(1, maTaiKhoan);
+                roleStmt.setString(
+                        1,
+                        maTaiKhoan);
+
                 roleStmt.executeUpdate();
 
-                // Xóa tài khoản
-                PreparedStatement tkStmt =
-                        connection.prepareStatement(deleteTaiKhoanSql);
+                PreparedStatement accStmt =
+                        conn.prepareStatement(
+                                accountSql);
 
-                tkStmt.setString(1, maTaiKhoan);
-                tkStmt.executeUpdate();
+                accStmt.setString(
+                        1,
+                        maTaiKhoan);
 
-                connection.commit();
+                accStmt.executeUpdate();
 
-            } catch (Exception ex) {
+                conn.commit();
 
-                connection.rollback();
+            }catch(Exception ex){
+
+                conn.rollback();
+
                 throw ex;
             }
 
-        } catch (Exception e) {
+        }catch(Exception e){
 
             e.printStackTrace();
         }
