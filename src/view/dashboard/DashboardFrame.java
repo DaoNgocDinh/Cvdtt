@@ -18,7 +18,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import view.loan.CreateLoanFrame;
-import view.loan.LoanListFrame;
 
 public class DashboardFrame extends JFrame {
 
@@ -238,9 +237,9 @@ public class DashboardFrame extends JFrame {
                 new CustomerListFrame();
             }
         }));
-        modules.add(createModuleCard("Loan", "Loan files and approval", "L", new Color(22, 163, 74), () -> {
+        modules.add(createModuleCard("Loan", "Loan creation", "L", new Color(22, 163, 74), () -> {
             if (Authorization.requireAnyRole(this, "ADMIN", "NHANVIEN")) {
-                new LoanListFrame();
+                new CreateLoanFrame(new VayFacade()).setVisible(true);
             }
         }));
         modules.add(createModuleCard("Risk", "Risk alerts", "R", new Color(220, 38, 38), () -> {
