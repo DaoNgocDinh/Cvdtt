@@ -147,6 +147,14 @@ public class TaiKhoanRepository {
     public void delete(
             String maTaiKhoan){
 
+        String ruiRoSql =
+                "DELETE FROM RuiRo "
+                        + "WHERE MaKhoanVay IN (SELECT MaKhoanVay FROM Vay WHERE MaTaiKhoan=?)";
+
+        String vaySql =
+                "DELETE FROM Vay "
+                        + "WHERE MaTaiKhoan=?";
+
         String roleSql =
                 "DELETE FROM Role "
                         + "WHERE MaTaiKhoan=?";
@@ -163,6 +171,26 @@ public class TaiKhoanRepository {
             conn.setAutoCommit(false);
 
             try{
+
+                PreparedStatement ruiRoStmt =
+                        conn.prepareStatement(
+                                ruiRoSql);
+
+                ruiRoStmt.setString(
+                        1,
+                        maTaiKhoan);
+
+                ruiRoStmt.executeUpdate();
+
+                PreparedStatement vayStmt =
+                        conn.prepareStatement(
+                                vaySql);
+
+                vayStmt.setString(
+                        1,
+                        maTaiKhoan);
+
+                vayStmt.executeUpdate();
 
                 PreparedStatement roleStmt =
                         conn.prepareStatement(
@@ -236,5 +264,26 @@ public class TaiKhoanRepository {
 
             e.printStackTrace();
         }
+    }
+
+    public java.util.List<TaiKhoan> findAll() {
+        java.util.List<TaiKhoan> list = new java.util.ArrayList<>();
+        String sql = "SELECT t.*, r.RoleName " +
+                "FROM TaiKhoan t " +
+                "LEFT JOIN Role r ON t.MaTaiKhoan = r.MaTaiKhoan";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                list.add(mapToTaiKhoan(rs));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 }

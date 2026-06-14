@@ -117,4 +117,12 @@ public class TaiKhoanFacade {
 
         command.execute();
     }
+
+    public TaiKhoan getTaiKhoanById(String maTaiKhoan) {
+        return taiKhoanService.findById(maTaiKhoan);
+    }
+
+    public java.util.List<TaiKhoan> getAllTaiKhoan() {
+        return taiKhoanService.findAll();
+    }
 }

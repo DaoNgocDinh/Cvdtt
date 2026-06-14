@@ -16,7 +16,7 @@ public class SQLServerConnection {
 
     private static final String DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     // Default values set to user's local instance (use host:port to avoid instance resolution); can be overridden with system properties
-    private static final String SERVER = "MSI";
+    private static final String SERVER = "DESKTOP-B4J24OU:1433";
     private static final String DATABASE = "cvdtt1";
     private static final String USERNAME = "sa";
     private static final String PASSWORD = "123456";

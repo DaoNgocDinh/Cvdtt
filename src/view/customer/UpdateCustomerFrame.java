@@ -1,9 +1,12 @@
 package view.customer;
 
+import facade.TaiKhoanFacade;
+import model.account.TaiKhoan;
 import view.common.AppUi;
 
 import javax.swing.*;
 import java.awt.*;
+import java.math.BigDecimal;
 
 public class UpdateCustomerFrame extends JFrame {
 
@@ -58,6 +61,27 @@ public class UpdateCustomerFrame extends JFrame {
 
         save.addActionListener(e -> {
             if (AppUi.requireText(this, txtId, txtName, txtEmail, txtIdentity, txtPhone)) {
+                TaiKhoanFacade facade = new TaiKhoanFacade();
+                TaiKhoan existing = facade.getTaiKhoanById(txtId.getText().trim());
+                if (existing == null) {
+                    JOptionPane.showMessageDialog(this, "Khong tim thay tai khoan.", "Loi", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                TaiKhoan taiKhoan = new TaiKhoan();
+                taiKhoan.setMaTaiKhoan(txtId.getText().trim());
+                taiKhoan.setHoTen(txtName.getText().trim());
+                taiKhoan.setEmail(txtEmail.getText().trim());
+                taiKhoan.setMatKhau(existing.getMatKhau());
+                taiKhoan.setCccd(txtIdentity.getText().trim());
+                taiKhoan.setSoDienThoai(txtPhone.getText().trim());
+                taiKhoan.setChucVu(existing.getChucVu() != null ? existing.getChucVu() : "KHACHHANG");
+                taiKhoan.setLocker(existing.getLocker());
+                taiKhoan.setRoleName(existing.getRoleName());
+                taiKhoan.setSoTienConNo(existing.getSoTienConNo());
+
+                facade.updateTaiKhoan(taiKhoan);
+
                 AppUi.success(this, "Cap nhat khach hang thanh cong. Audit Log da duoc ghi nhan.");
                 dispose();
             }
