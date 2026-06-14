@@ -73,7 +73,6 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/RiskService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/AuditService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/NotificationService.java</file>
-            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/CustomerRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/AuditRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/RiskRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/NotificationRepository.java</file>
@@ -95,6 +94,10 @@
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/TaiKhoanRepository.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/TaiKhoanAuthenticationService.java</file>
             <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/model/account/TaiKhoan.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/repository/VayRepository.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/facade/VayFacade.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/service/VayService.java</file>
+            <file>file:/D:/CVDTT/CuoiKy/CVDTT_CKy/src/main/test.java</file>
         </group>
     </open-files>
 </project-private>

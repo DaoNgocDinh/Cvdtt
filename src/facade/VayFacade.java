@@ -3,7 +3,6 @@ import command.loan.CreateVayCommand;
 import factory.VayFactory;
 import model.loan.Vay;
 import service.VayService;
-import facade.VayFacade;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
