@@ -1,10 +1,13 @@
 package view.customer;
 
 import view.common.AppUi;
+import facade.TaiKhoanFacade;
+import model.account.TaiKhoan;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
 
 public class CustomerListFrame extends JFrame {
 
@@ -31,11 +34,23 @@ public class CustomerListFrame extends JFrame {
         toolbar.add(delete);
 
         String[] columns = {"Ma KH", "Ho ten", "Email", "CCCD", "So dien thoai", "Dia chi", "Loai KH"};
-        Object[][] rows = {
-                {"KH001", "Nguyen Thanh Tung", "tung.nt@email.com", "001203004455", "0901234567", "Ha Noi", "Ca nhan"},
-                {"KH002", "Cong ty Minh Phat", "contact@minhphat.vn", "010203040506", "0912345678", "Da Nang", "Doanh nghiep"},
-                {"KH003", "Le Thu Ha", "ha.lt@email.com", "079203009911", "0987654321", "TP HCM", "Ca nhan"}
-        };
+        
+        // Load data from database
+        TaiKhoanFacade facade = new TaiKhoanFacade();
+        List<TaiKhoan> accounts = facade.getAllTaiKhoan();
+        
+        Object[][] rows = new Object[accounts.size()][columns.length];
+        for (int i = 0; i < accounts.size(); i++) {
+            TaiKhoan account = accounts.get(i);
+            rows[i][0] = account.getMaTaiKhoan();
+            rows[i][1] = account.getHoTen();
+            rows[i][2] = account.getEmail();
+            rows[i][3] = account.getCccd();
+            rows[i][4] = account.getSoDienThoai();
+            rows[i][5] = ""; // Dia chi - not in model yet
+            rows[i][6] = account.getChucVu(); // Using ChucVu as Loai KH
+        }
+        
         table = AppUi.table(columns, rows);
 
         create.addActionListener(e -> new CreateCustomerFrame());
@@ -54,6 +69,8 @@ public class CustomerListFrame extends JFrame {
         delete.addActionListener(e -> {
             int row = selectedRow();
             if (row >= 0 && JOptionPane.showConfirmDialog(this, "Ban co chac muon xoa khach hang nay?", "Xac nhan", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                String maKh = String.valueOf(table.getValueAt(row, 0));
+                facade.deleteTaiKhoan(maKh);
                 ((DefaultTableModel) table.getModel()).removeRow(row);
                 AppUi.success(this, "Xoa khach hang thanh cong. Audit Log da duoc ghi nhan.");
             }

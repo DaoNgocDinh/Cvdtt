@@ -1,5 +1,12 @@
 package view.dashboard;
 
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import utils.AuthSession;
+import utils.Authorization;
 import view.audit.AuditLogFrame;
 import view.auth.LoginFrame;
 import view.customer.CustomerListFrame;
@@ -7,14 +14,8 @@ import view.employee.EmployeeListFrame;
 import view.loan.LoanListFrame;
 import view.notification.NotificationFrame;
 import view.permission.PermissionFrame;
-import view.risk.RiskAlertFrame;
 import view.report.ReportFrame;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import view.risk.RiskAlertFrame;
 
 public class DashboardFrame extends JFrame {
 
@@ -94,6 +95,7 @@ public class DashboardFrame extends JFrame {
         logout.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this, "Ban co chac muon dang xuat?", "Xac nhan dang xuat", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
+                AuthSession.clear();
                 dispose();
                 new LoginFrame();
             }
@@ -223,13 +225,46 @@ public class DashboardFrame extends JFrame {
         JPanel modules = new JPanel(new GridLayout(2, 4, 18, 18));
         modules.setOpaque(false);
 
-        modules.add(createModuleCard("Employee", "Staff records and roles", "E", new Color(37, 99, 235), () -> new EmployeeListFrame()));
-        modules.add(createModuleCard("Customer", "Customer profiles", "C", new Color(14, 165, 233), () -> new CustomerListFrame()));
-        modules.add(createModuleCard("Loan", "Loan files and approval", "L", new Color(22, 163, 74), () -> new LoanListFrame()));
-        modules.add(createModuleCard("Permission", "Access control", "P", new Color(124, 58, 237), () -> new PermissionFrame()));
-        modules.add(createModuleCard("Risk", "Risk alerts", "R", new Color(220, 38, 38), () -> new RiskAlertFrame()));
-        modules.add(createModuleCard("Audit Log", "System activity", "A", new Color(217, 119, 6), () -> new AuditLogFrame()));
-        modules.add(createModuleCard("Notification", "Internal messages", "N", new Color(6, 182, 212), () -> new NotificationFrame()));
+        modules.add(createModuleCard("Employee", "Staff records and roles", "E", new Color(37, 99, 235), () -> {
+            if (Authorization.requireAnyRole(this, "ADMIN", "MANAGER")) {
+                new EmployeeListFrame();
+            }
+        }));
+        modules.add(createModuleCard("Customer", "Customer profiles", "C", new Color(14, 165, 233), () -> {
+            if (Authorization.requireAnyRole(this, "ADMIN", "NHANVIEN")) {
+                new CustomerListFrame();
+            }
+        }));
+        modules.add(createModuleCard("Loan", "Loan files and approval", "L", new Color(22, 163, 74), () -> {
+            if (Authorization.requireAnyRole(this, "ADMIN", "NHANVIEN")) {
+                new LoanListFrame();
+            }
+        }));
+        modules.add(createModuleCard("Permission", "Access control", "P", new Color(124, 58, 237), () -> {
+            if (Authorization.requireRole(this, "ADMIN")) {
+                new PermissionFrame();
+            }
+        }));
+        modules.add(createModuleCard("Risk", "Risk alerts", "R", new Color(220, 38, 38), () -> {
+            if (Authorization.requireAnyRole(this, "ADMIN", "AUDITOR", "RISK_OFFICER")) {
+                new RiskAlertFrame();
+            }
+        }));
+        modules.add(createModuleCard("Audit Log", "System activity", "A", new Color(217, 119, 6), () -> {
+            if (Authorization.requireAnyRole(this, "ADMIN", "AUDITOR")) {
+                new AuditLogFrame();
+            }
+        }));
+        modules.add(createModuleCard("Notification", "Internal messages", "N", new Color(6, 182, 212), () -> {
+            if (Authorization.requireAnyRole(this, "ADMIN", "NHANVIEN", "MANAGER", "AUDITOR", "RISK_OFFICER")) {
+                new NotificationFrame();
+            }
+        }));
+        modules.add(createModuleCard("Report", "System statistics", "B", new Color(15, 118, 110), () -> {
+            if (Authorization.requireRole(this, "ADMIN")) {
+                new ReportFrame();
+            }
+        }));
 
         return modules;
     }

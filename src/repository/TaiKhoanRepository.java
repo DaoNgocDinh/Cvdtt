@@ -5,13 +5,11 @@
 package repository;
 
 import database.DatabaseConnection;
-import model.account.TaiKhoan;
-
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.account.TaiKhoan;
 
 /**
  *
@@ -35,6 +33,40 @@ public class TaiKhoanRepository {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+    public TaiKhoan findById(String maTaiKhoan){
+
+        String sql =
+                "SELECT t.*, r.RoleName "
+                        + "FROM TaiKhoan t "
+                        + "LEFT JOIN Role r "
+                        + "ON t.MaTaiKhoan = r.MaTaiKhoan "
+                        + "WHERE t.MaTaiKhoan = ?";
+
+        try(
+                Connection conn =
+                        DatabaseConnection.getConnection();
+
+                PreparedStatement stmt =
+                        conn.prepareStatement(sql)
+        ){
+
+            stmt.setString(1, maTaiKhoan);
+
+            ResultSet rs =
+                    stmt.executeQuery();
+
+            if(rs.next()){
+
+                return mapToTaiKhoan(rs);
+            }
+
+        }catch(Exception e){
+
+            e.printStackTrace();
+        }
+
         return null;
     }
 
@@ -109,43 +141,84 @@ public class TaiKhoanRepository {
         }
     }
 
-    public void delete(String maTaiKhoan) {
+    public void delete(
+            String maTaiKhoan){
 
-        String deleteRoleSql
-                = "DELETE FROM Role WHERE MaTaiKhoan = ?";
+        String ruiRoSql =
+                "DELETE FROM RuiRo "
+                        + "WHERE MaKhoanVay IN (SELECT MaKhoanVay FROM Vay WHERE MaTaiKhoan=?)";
 
-        String deleteTaiKhoanSql
-                = "DELETE FROM TaiKhoan WHERE MaTaiKhoan = ?";
+        String vaySql =
+                "DELETE FROM Vay "
+                        + "WHERE MaTaiKhoan=?";
 
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        String roleSql =
+                "DELETE FROM Role "
+                        + "WHERE MaTaiKhoan=?";
 
-            connection.setAutoCommit(false);
+        String accountSql =
+                "DELETE FROM TaiKhoan "
+                        + "WHERE MaTaiKhoan=?";
 
-            try {
+        try(
+                Connection conn =
+                        DatabaseConnection.getConnection()
+        ){
 
-                // Xóa role trước
-                PreparedStatement roleStmt
-                        = connection.prepareStatement(deleteRoleSql);
+            conn.setAutoCommit(false);
 
-                roleStmt.setString(1, maTaiKhoan);
+            try{
+
+                PreparedStatement ruiRoStmt =
+                        conn.prepareStatement(
+                                ruiRoSql);
+
+                ruiRoStmt.setString(
+                        1,
+                        maTaiKhoan);
+
+                ruiRoStmt.executeUpdate();
+
+                PreparedStatement vayStmt =
+                        conn.prepareStatement(
+                                vaySql);
+
+                vayStmt.setString(
+                        1,
+                        maTaiKhoan);
+
+                vayStmt.executeUpdate();
+
+                PreparedStatement roleStmt =
+                        conn.prepareStatement(
+                                roleSql);
+
+                roleStmt.setString(
+                        1,
+                        maTaiKhoan);
+
                 roleStmt.executeUpdate();
 
-                // Xóa tài khoản
-                PreparedStatement tkStmt
-                        = connection.prepareStatement(deleteTaiKhoanSql);
+                PreparedStatement accStmt =
+                        conn.prepareStatement(
+                                accountSql);
 
-                tkStmt.setString(1, maTaiKhoan);
-                tkStmt.executeUpdate();
+                accStmt.setString(
+                        1,
+                        maTaiKhoan);
 
-                connection.commit();
+                accStmt.executeUpdate();
 
-            } catch (Exception ex) {
+                conn.commit();
 
-                connection.rollback();
+            }catch(Exception ex){
+
+                conn.rollback();
+
                 throw ex;
             }
 
-        } catch (Exception e) {
+        }catch(Exception e){
 
             e.printStackTrace();
         }
@@ -186,6 +259,27 @@ public class TaiKhoanRepository {
 
             e.printStackTrace();
         }
+    }
+
+    public java.util.List<TaiKhoan> findAll() {
+        java.util.List<TaiKhoan> list = new java.util.ArrayList<>();
+        String sql = "SELECT t.*, r.RoleName " +
+                "FROM TaiKhoan t " +
+                "LEFT JOIN Role r ON t.MaTaiKhoan = r.MaTaiKhoan";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                list.add(mapToTaiKhoan(rs));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
     public TaiKhoan findByUsername(String username) {

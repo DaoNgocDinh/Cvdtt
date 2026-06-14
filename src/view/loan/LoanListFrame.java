@@ -1,5 +1,7 @@
 package view.loan;
 
+import facade.VayFacade;
+import utils.Authorization;
 import view.common.AppUi;
 
 import javax.swing.*;
@@ -37,7 +39,11 @@ public class LoanListFrame extends JFrame {
         };
         table = AppUi.table(columns, rows);
 
-        create.addActionListener(e -> new CreateLoanFrame());
+        create.addActionListener(e -> {
+            if (Authorization.requireAnyRole(this, "ADMIN", "NHANVIEN")) {
+                new CreateLoanFrame(new VayFacade()).setVisible(true);
+            }
+        });
         detail.addActionListener(e -> {
             int row = selectedRow();
             if (row >= 0) {
@@ -45,6 +51,9 @@ public class LoanListFrame extends JFrame {
             }
         });
         approve.addActionListener(e -> {
+            if (!Authorization.requireAnyRole(this, "ADMIN", "MANAGER")) {
+                return;
+            }
             int row = selectedRow();
             if (row >= 0) {
                 new LoanApprovalFrame(rowData(row), true);
@@ -52,6 +61,9 @@ public class LoanListFrame extends JFrame {
             }
         });
         reject.addActionListener(e -> {
+            if (!Authorization.requireAnyRole(this, "ADMIN", "MANAGER")) {
+                return;
+            }
             int row = selectedRow();
             if (row >= 0) {
                 new LoanApprovalFrame(rowData(row), false);

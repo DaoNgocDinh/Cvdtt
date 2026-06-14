@@ -1,9 +1,11 @@
 package view.customer;
 
+import facade.TaiKhoanFacade;
 import view.common.AppUi;
 
 import javax.swing.*;
 import java.awt.*;
+import java.math.BigDecimal;
 
 public class CreateCustomerFrame extends JFrame {
 
@@ -65,7 +67,18 @@ public class CreateCustomerFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Email khong dung dinh dang.", "Du lieu khong hop le", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        AppUi.success(this, "Tao tai khoan khach hang thanh cong. He thong da sinh username, mat khau mac dinh va ghi Audit Log.");
+
+        TaiKhoanFacade facade = new TaiKhoanFacade();
+        facade.createKhachHang(
+                txtId.getText().trim(),
+                txtName.getText().trim(),
+                txtEmail.getText().trim(),
+                "123456",
+                txtPhone.getText().trim(),
+                txtIdentity.getText().trim(),
+                BigDecimal.ZERO);
+
+        AppUi.success(this, "Tao tai khoan khach hang thanh cong. Audit Log da duoc ghi nhan.");
         dispose();
     }
 }

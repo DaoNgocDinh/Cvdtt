@@ -1,0 +1,80 @@
+package service;
+
+import database.DatabaseConnection;
+import model.account.TaiKhoan;
+import model.loan.Vay;
+import repository.TaiKhoanRepository;
+import repository.VayRepository;
+import java.sql.Connection;
+import java.math.BigDecimal;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.List;
+
+public class VayService {
+
+    private VayRepository vayRepository;
+    private TaiKhoanRepository taiKhoanRepository;
+
+    public VayService() {
+        vayRepository = new VayRepository();
+        taiKhoanRepository = new TaiKhoanRepository();
+    }
+
+    public List<Vay> getAllLoans() {
+        return vayRepository.findAll();
+    }
+
+
+    public void createVay(Vay vay) {
+
+        // 1. Check null object
+        if (vay == null) {
+            throw new IllegalArgumentException("Khoản vay không được null");
+        }
+
+        // 2. Check mã tài khoản
+        if (vay.getMaTaiKhoan() == null || vay.getMaTaiKhoan().trim().isEmpty()) {
+            throw new IllegalArgumentException("Mã tài khoản không hợp lệ");
+        }
+
+        TaiKhoan khachHang =
+                taiKhoanRepository.findById(vay.getMaTaiKhoan());
+
+        if (khachHang == null) {
+            throw new IllegalStateException("Không tìm thấy tài khoản: " + vay.getMaTaiKhoan());
+        }
+
+        // 3. Check số tiền vay
+        if (vay.getSoTienVay() == null) {
+            throw new IllegalArgumentException("Số tiền vay không được null");
+        }
+
+        if (vay.getSoTienVay().compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Số tiền vay phải lớn hơn 0");
+        }
+
+        // 4. Check ngày vay
+        if (vay.getNgayVay() == null) {
+            throw new IllegalArgumentException("Ngày vay không được null");
+        }
+
+        if (vay.getHanTraNo() == null) {
+            throw new IllegalArgumentException("Hạn trả nợ không được null");
+        }
+
+        if (vay.getHanTraNo().isBefore(vay.getNgayVay())) {
+            throw new IllegalArgumentException("Hạn trả nợ phải sau ngày vay");
+        }
+        if (vayRepository.existsById(vay.getMaKhoanVay())) {
+            throw new IllegalStateException("Mã khoản vay đã tồn tại");
+        }
+
+        // 5. Lưu DB
+        try {
+            vayRepository.save(vay);
+        } catch (Exception e) {
+            throw new RuntimeException("Lỗi khi lưu khoản vay: " + e.getMessage(), e);
+        }
+    }
+}
