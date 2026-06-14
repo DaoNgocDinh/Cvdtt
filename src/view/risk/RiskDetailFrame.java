@@ -8,7 +8,7 @@ import java.awt.*;
 public class RiskDetailFrame extends JFrame {
 
     public RiskDetailFrame() {
-        this(new String[]{"CB001", "Dang nhap bat thuong", "LoginService", "Cao", "Dang nhap sai nhieu lan", "Moi"});
+        this(new String[]{"CB001", "Dang nhap bat thuong", "LoginService", "Rui ro dang nhap", "Dang nhap sai nhieu lan", "Moi"});
     }
 
     public RiskDetailFrame(String[] data) {
