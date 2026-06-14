@@ -3,13 +3,12 @@ package strategy.vay;
 import database.DatabaseConnection;
 import model.loan.Vay;
 import singleton.SecurityService;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 
 public class VayManager {
-
+    
     private VayStrategy strategy;
 
     public void setStrategy(VayStrategy strategy) {
@@ -24,7 +23,16 @@ public class VayManager {
             return;
         }
 
+        // Xử lý logic theo Strategy (tính hạn trả, lãi suất, tổng lãi, trả góp...)
         strategy.xuLyKhoanVay(vay);
+
+        // In thông tin tính toán lãi vay
+        System.out.println("[STRATEGY-VAY] Lai suat: " + vay.getLaiSuat() + " ("
+                + strategy.getMoTaCongThuc() + ")");
+        System.out.println("[STRATEGY-VAY] Tong lai phai tra: " + vay.getTongLaiPhaiTra());
+        System.out.println("[STRATEGY-VAY] So tien tra hang thang: " + vay.getSoTienTraHangThang());
+
+        // Lưu vào database
         luuVaoDatabase(vay);
 
         SecurityService.getInstance().accessFeature(
@@ -34,8 +42,10 @@ public class VayManager {
     }
 
     private void luuVaoDatabase(Vay vay) {
-        String sql = "INSERT INTO Vay(MaKhoanVay, MaTaiKhoan, NgayVay, SoTienVay, HanTraNo) "
-                + "VALUES (?, ?, ?, ?, ?)";
+        // Cập nhật SQL để lưu thêm thông tin lãi vay
+        String sql = "INSERT INTO Vay(MaKhoanVay, MaTaiKhoan, NgayVay, SoTienVay, HanTraNo, "
+                   + "LaiSuat, TongLaiPhaiTra, SoTienTraHangThang) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -45,12 +55,16 @@ public class VayManager {
             ps.setDate(3, Date.valueOf(vay.getNgayVay()));
             ps.setBigDecimal(4, vay.getSoTienVay());
             ps.setDate(5, Date.valueOf(vay.getHanTraNo()));
+            
+            // Các trường mới
+            ps.setBigDecimal(6, vay.getLaiSuat());
+            ps.setBigDecimal(7, vay.getTongLaiPhaiTra());
+            ps.setBigDecimal(8, vay.getSoTienTraHangThang());
 
             ps.executeUpdate();
-
+            
             System.out.println("[STRATEGY-VAY] Saved to table Vay successfully.");
             System.out.println("[STRATEGY-VAY] MaKhoanVay: " + vay.getMaKhoanVay());
-            System.out.println("[STRATEGY-VAY] MaTaiKhoan: " + vay.getMaTaiKhoan());
 
         } catch (Exception e) {
             System.out.println("[STRATEGY-VAY] Save error: " + e.getMessage());
