@@ -5,6 +5,7 @@ import observer.subjects.LoginService;
 import proxy.AuditProxy;
 import repository.TaiKhoanRepository;
 import service.TaiKhoanAuthenticationService;
+import utils.AuthSession;
 import view.dashboard.DashboardFrame;
 
 import javax.swing.*;
@@ -212,6 +213,7 @@ public class LoginFrame extends JFrame {
             return;
         }
 
+        AuthSession.setCurrentUser(taiKhoan);
         dispose();
         new DashboardFrame();
     }
