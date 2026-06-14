@@ -4,10 +4,19 @@
  */
 package chainofresponsibility;
 
+import model.account.TaiKhoan;
+
 /**
  *
  * @author FPTSHOP
  */
-public class AccessHandler {
-    
+public abstract class AccessHandler {
+
+    protected AccessHandler nextHandler;
+
+    public void setNextHandler(AccessHandler nextHandler) {
+        this.nextHandler = nextHandler;
+    }
+
+    public abstract boolean handle(TaiKhoan taikhoan);
 }

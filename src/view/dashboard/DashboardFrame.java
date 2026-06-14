@@ -1,15 +1,16 @@
 package view.dashboard;
 
 import facade.VayFacade;
+import utils.AuthSession;
+import utils.Authorization;
+
 import view.audit.AuditLogFrame;
 import view.auth.LoginFrame;
 import view.customer.CustomerListFrame;
 import view.employee.EmployeeListFrame;
+import view.loan.CreateLoanFrame;
 import view.notification.NotificationFrame;
 import view.risk.RiskAlertFrame;
-import view.report.ReportFrame;
-import utils.AuthSession;
-import utils.Authorization;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,7 +18,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import view.loan.CreateLoanFrame;
 
 public class DashboardFrame extends JFrame {
 
@@ -242,6 +242,7 @@ public class DashboardFrame extends JFrame {
                 new CreateLoanFrame(new VayFacade()).setVisible(true);
             }
         }));
+        // Permission module removed per request (no UI entry)
         modules.add(createModuleCard("Risk", "Risk alerts", "R", new Color(220, 38, 38), () -> {
             if (Authorization.requireAnyRole(this, "ADMIN", "AUDITOR", "RISK_OFFICER")) {
                 new RiskAlertFrame();
@@ -257,11 +258,7 @@ public class DashboardFrame extends JFrame {
                 new NotificationFrame();
             }
         }));
-        modules.add(createModuleCard("Report", "System statistics", "B", new Color(15, 118, 110), () -> {
-            if (Authorization.requireRole(this, "ADMIN")) {
-                new ReportFrame();
-            }
-        }));
+        // Report module removed per request
 
         return modules;
     }
@@ -327,6 +324,7 @@ public class DashboardFrame extends JFrame {
     }
 
     private static class SidebarPanel extends JPanel {
+
         SidebarPanel() {
             setOpaque(false);
         }
@@ -347,6 +345,7 @@ public class DashboardFrame extends JFrame {
     }
 
     private static class RoundedPanel extends JPanel {
+
         private final int radius;
         private final Color color;
 

@@ -10,21 +10,32 @@ import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import decorator.audit.AlertDecorator;
+import decorator.audit.AuditLogger;
+import decorator.audit.BasicAuditLogger;
+import decorator.audit.SecurityDecorator;
+import chainofresponsibility.risk.*;
 
 public class VayService {
 
     private VayRepository vayRepository;
     private TaiKhoanRepository taiKhoanRepository;
+    private AuditLogger logger;
 
     public VayService() {
+
         vayRepository = new VayRepository();
         taiKhoanRepository = new TaiKhoanRepository();
+
+        logger
+                = new AlertDecorator(
+                        new SecurityDecorator(
+                                new BasicAuditLogger()));
     }
 
     public List<Vay> getAllLoans() {
         return vayRepository.findAll();
     }
-
 
     public void createVay(Vay vay) {
 
@@ -38,8 +49,8 @@ public class VayService {
             throw new IllegalArgumentException("Mã tài khoản không hợp lệ");
         }
 
-        TaiKhoan khachHang =
-                taiKhoanRepository.findById(vay.getMaTaiKhoan());
+        TaiKhoan khachHang
+                = taiKhoanRepository.findById(vay.getMaTaiKhoan());
 
         if (khachHang == null) {
             throw new IllegalStateException("Không tìm thấy tài khoản: " + vay.getMaTaiKhoan());
@@ -73,6 +84,27 @@ public class VayService {
         // 5. Lưu DB
         try {
             vayRepository.save(vay);
+
+            RiskContext context
+                    = new RiskContext();
+
+            context.vay = vay;
+            context.khachHang = khachHang;
+
+            System.out.println("BAT DAU DANH GIA RUI RO");
+
+            new RiskChainManager()
+                    .evaluate(context);
+
+            System.out.println("KET THUC DANH GIA RUI RO");
+
+            logger.log(
+                    "loan.created | "
+                    + vay.getMaKhoanVay()
+                    + " | "
+                    + vay.getMaTaiKhoan()
+                    + " | "
+                    + vay.getSoTienVay());
         } catch (Exception e) {
             throw new RuntimeException("Lỗi khi lưu khoản vay: " + e.getMessage(), e);
         }

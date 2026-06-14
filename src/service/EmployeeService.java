@@ -4,10 +4,13 @@
  */
 package service;
 
+import model.account.TaiKhoan;
+
 /**
  *
  * @author FPTSHOP
  */
-public class EmployeeService {
-    
+public interface EmployeeService {
+
+    void createEmployee(TaiKhoan taikhoan);
 }

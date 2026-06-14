@@ -1,11 +1,10 @@
 package view.loan;
 
 import facade.VayFacade;
-
-import javax.swing.*;
 import java.awt.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import javax.swing.*;
 
 public class CreateLoanFrame extends JFrame {
 

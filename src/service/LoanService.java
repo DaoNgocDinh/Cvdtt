@@ -4,10 +4,13 @@
  */
 package service;
 
+import model.loan.Vay;
+
+
 /**
  *
  * @author FPTSHOP
  */
-public class LoanService {
-    
+public interface LoanService {
+    void createLoan(Vay vay);
 }

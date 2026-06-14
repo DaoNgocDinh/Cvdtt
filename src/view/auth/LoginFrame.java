@@ -193,6 +193,7 @@ public class LoginFrame extends JFrame {
         return button;
     }
 
+
     private void openDashboard() {
         String username = txtUsername.getText().trim();
         String password = new String(txtPassword.getPassword()).trim();
@@ -224,6 +225,7 @@ public class LoginFrame extends JFrame {
     }
 
     private static class RoundedPanel extends JPanel {
+
         private final int radius;
         private final Color color;
 
