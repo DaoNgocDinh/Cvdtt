@@ -1,28 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package builder;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import model.loan.Loan;
+import model.loan.Vay;
 
-/**
- *
- * @author FPTSHOP
- */
 public class LoanBuilder {
 
-    private String loanId;
-    private String customerId;
-    private double amount;
-    private int termMonths;
-    private double interestRate;
-    private String loanType;
-    private String status;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String riskLevel;
+    private String maKhoanVay;
+    private LocalDate ngayVay;
+    private BigDecimal soTienVay;
+    private LocalDate hanTraNo;
 
     private LoanBuilder() {
     }
@@ -31,68 +18,35 @@ public class LoanBuilder {
         return new LoanBuilder();
     }
 
-    public LoanBuilder loanId(String loanId) {
-        this.loanId = loanId;
+    public LoanBuilder maKhoanVay(String maKhoanVay) {
+        this.maKhoanVay = maKhoanVay;
         return this;
     }
 
-    public LoanBuilder customerId(String customerId) {
-        this.customerId = customerId;
+    public LoanBuilder ngayVay(LocalDate ngayVay) {
+        this.ngayVay = ngayVay;
         return this;
     }
 
-    public LoanBuilder amount(double amount) {
-        this.amount = amount;
+    public LoanBuilder soTienVay(BigDecimal soTienVay) {
+        this.soTienVay = soTienVay;
         return this;
     }
 
-    public LoanBuilder termMonths(int termMonths) {
-        this.termMonths = termMonths;
+    public LoanBuilder hanTraNo(LocalDate hanTraNo) {
+        this.hanTraNo = hanTraNo;
         return this;
     }
 
-    public LoanBuilder interestRate(double interestRate) {
-        this.interestRate = interestRate;
-        return this;
-    }
+    public Vay build() {
 
-    public LoanBuilder loanType(String loanType) {
-        this.loanType = loanType;
-        return this;
-    }
+        Vay vay = new Vay();
 
-    public LoanBuilder status(String status) {
-        this.status = status;
-        return this;
-    }
+        vay.setMaKhoanVay(maKhoanVay);
+        vay.setNgayVay(ngayVay);
+        vay.setSoTienVay(soTienVay);
+        vay.setHanTraNo(hanTraNo);
 
-    public LoanBuilder startDate(LocalDate startDate) {
-        this.startDate = startDate;
-        return this;
-    }
-
-    public LoanBuilder endDate(LocalDate endDate) {
-        this.endDate = endDate;
-        return this;
-    }
-
-    public LoanBuilder riskLevel(String riskLevel) {
-        this.riskLevel = riskLevel;
-        return this;
-    }
-
-    public Loan build() {
-        Loan loan = new Loan();
-        loan.setLoanId(loanId);
-        loan.setCustomerId(customerId);
-        loan.setAmount(amount);
-        loan.setTermMonths(termMonths);
-        loan.setInterestRate(interestRate);
-        loan.setLoanType(loanType);
-        loan.setStatus(status);
-        loan.setStartDate(startDate);
-        loan.setEndDate(endDate);
-        loan.setRiskLevel(riskLevel);
-        return loan;
+        return vay;
     }
 }

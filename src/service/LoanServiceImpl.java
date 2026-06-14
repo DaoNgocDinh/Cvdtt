@@ -6,11 +6,17 @@ package service;
 
 import model.loan.Vay;
 
-
 /**
  *
  * @author FPTSHOP
  */
-public interface LoanService {
-    void createLoan(Vay vay);
+public class LoanServiceImpl implements LoanService {
+
+    @Override
+    public void createLoan(Vay vay) {
+
+        System.out.println(
+                "Luu khoan vay moi vao Database"
+        );
+    }
 }

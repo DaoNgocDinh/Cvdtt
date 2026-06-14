@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package chainofresponsibility;
+package chainofresponsibility.forusermanagerment;
 
+import chainofresponsibility.AccessHandler;
 import model.employee.Employee;
 
 /**
@@ -16,11 +17,11 @@ public class AuthenticationHandler extends AccessHandler {
     public boolean handle(Employee employee) {
 
         if (employee == null) {
-            System.out.println("Sai tài khoản hoặc mật khẩu");
+            System.out.println("Sai tai khoan hoac mat khau");
             return false;
         }
 
-        System.out.println("Xác thực thành công");
+        System.out.println("Xac thuc thanh cong");
 
         if (nextHandler != null) {
             return nextHandler.handle(employee);
